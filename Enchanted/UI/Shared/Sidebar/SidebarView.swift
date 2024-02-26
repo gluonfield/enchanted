@@ -18,7 +18,7 @@ struct SidebarView: View {
     
     private func onSettingsTap() {
         Task {
-            showSettings.toggle()
+            showSettings.toggle() 
             Haptics.shared.mediumTap()
         }
     }

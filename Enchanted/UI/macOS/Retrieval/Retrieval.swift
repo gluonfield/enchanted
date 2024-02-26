@@ -9,11 +9,23 @@ import SwiftUI
 
 struct Retrieval: View {
     @State var retrievalStore = RetrievalStore.shared
-    @State var languageModelStore = LanguageModelStore.shared   
+    @State var languageModelStore = LanguageModelStore.shared
     
-    func createDatabase(name: String) {
+    func createDatabase(name: String, languageModelName: String) {
         Task {
-            try? await retrievalStore.createDatabase(name: name, indexPath: "./www.com")
+            try? await retrievalStore.createDatabase(name: name, indexPath: "./www.com", languageModelName: languageModelName)
+        }
+    }
+    
+    func onAddDocuments(databaseId: UUID, paths: [URL]) {
+        Task {
+            try? await retrievalStore.attachDocuments(databaseId: databaseId, documentPaths: paths)
+        }
+    }
+    
+    func indexDocuments(databaseId: UUID) {
+        Task {
+            try? await retrievalStore.indexDocuments(databaseId: databaseId)
         }
     }
     
@@ -21,8 +33,11 @@ struct Retrieval: View {
         RetrievalView(
             databases: retrievalStore.databases,
             selectedDatabase: $retrievalStore.selectedDatabase,
+            languageModels: languageModelStore.models, 
             documents: retrievalStore.selectedDatabase?.documents ?? [],
-            onCreateDatabase: createDatabase
+            onCreateDatabase: createDatabase,
+            onAddDocuments: onAddDocuments,
+            onIndexDocuments: indexDocuments
         )
     }
 }

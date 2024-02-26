@@ -17,6 +17,12 @@
 		FF0BF3722B8A4408007C74E6 /* Retrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF3712B8A4408007C74E6 /* Retrieval.swift */; };
 		FF0BF3742B8A4507007C74E6 /* RetrievalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF3732B8A4507007C74E6 /* RetrievalStore.swift */; };
 		FF0BF3762B8A6995007C74E6 /* EmptyDatabaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF3752B8A6995007C74E6 /* EmptyDatabaseView.swift */; };
+		FF0BF37B2B8A9007007C74E6 /* LanguageModelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF37A2B8A9007007C74E6 /* LanguageModelProvider.swift */; };
+		FF0BF3812B8AA882007C74E6 /* TextSplitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF3802B8AA882007C74E6 /* TextSplitter.swift */; };
+		FF0BF3862B8B4B0B007C74E6 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF3852B8B4B0B007C74E6 /* DataLoader.swift */; };
+		FF0BF3882B8B4D0B007C74E6 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF3872B8B4D0B007C74E6 /* URL+Extension.swift */; };
+		FF0BF38B2B8BF852007C74E6 /* EmbeddingsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF38A2B8BF852007C74E6 /* EmbeddingsProtocol.swift */; };
+		FF0BF38E2B8BFA78007C74E6 /* VectorStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF38D2B8BFA78007C74E6 /* VectorStoreProtocol.swift */; };
 		FF1002302B2482BA0011A4DC /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF10022F2B2482BA0011A4DC /* ChatMessageView.swift */; };
 		FF1002322B2483A20011A4DC /* Colours+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1002312B2483A20011A4DC /* Colours+Extension.swift */; };
 		FF1002392B24BBF20011A4DC /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1002382B24BBF20011A4DC /* Chat.swift */; };
@@ -95,6 +101,13 @@
 		FF0BF3712B8A4408007C74E6 /* Retrieval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Retrieval.swift; sourceTree = "<group>"; };
 		FF0BF3732B8A4507007C74E6 /* RetrievalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievalStore.swift; sourceTree = "<group>"; };
 		FF0BF3752B8A6995007C74E6 /* EmptyDatabaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDatabaseView.swift; sourceTree = "<group>"; };
+		FF0BF37A2B8A9007007C74E6 /* LanguageModelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModelProvider.swift; sourceTree = "<group>"; };
+		FF0BF37C2B8A99A5007C74E6 /* OllamaKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = OllamaKit; path = ../OllamaKit; sourceTree = "<group>"; };
+		FF0BF3802B8AA882007C74E6 /* TextSplitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSplitter.swift; sourceTree = "<group>"; };
+		FF0BF3852B8B4B0B007C74E6 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
+		FF0BF3872B8B4D0B007C74E6 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
+		FF0BF38A2B8BF852007C74E6 /* EmbeddingsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddingsProtocol.swift; sourceTree = "<group>"; };
+		FF0BF38D2B8BFA78007C74E6 /* VectorStoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorStoreProtocol.swift; sourceTree = "<group>"; };
 		FF10022F2B2482BA0011A4DC /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
 		FF1002312B2483A20011A4DC /* Colours+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colours+Extension.swift"; sourceTree = "<group>"; };
 		FF1002382B24BBF20011A4DC /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -193,6 +206,33 @@
 				FF0BF3752B8A6995007C74E6 /* EmptyDatabaseView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		FF0BF3822B8B4ADD007C74E6 /* Retrieval */ = {
+			isa = PBXGroup;
+			children = (
+				FF0BF38C2B8BFA68007C74E6 /* VectorStore */,
+				FF0BF3892B8BF83B007C74E6 /* Embeddings */,
+				FF0BF3802B8AA882007C74E6 /* TextSplitter.swift */,
+				FF0BF3852B8B4B0B007C74E6 /* DataLoader.swift */,
+			);
+			path = Retrieval;
+			sourceTree = "<group>";
+		};
+		FF0BF3892B8BF83B007C74E6 /* Embeddings */ = {
+			isa = PBXGroup;
+			children = (
+				FF0BF38A2B8BF852007C74E6 /* EmbeddingsProtocol.swift */,
+			);
+			path = Embeddings;
+			sourceTree = "<group>";
+		};
+		FF0BF38C2B8BFA68007C74E6 /* VectorStore */ = {
+			isa = PBXGroup;
+			children = (
+				FF0BF38D2B8BFA78007C74E6 /* VectorStoreProtocol.swift */,
+			);
+			path = VectorStore;
 			sourceTree = "<group>";
 		};
 		FF10022C2B2481790011A4DC /* Components */ = {
@@ -306,6 +346,7 @@
 				FFEC9BE22B81358800AFBA63 /* DeallocPrinter.swift */,
 				FFEC9BDE2B8131B900AFBA63 /* HotKeys.swift */,
 				FFE21C772B82353A00A69B9C /* SleepTest.swift */,
+				FF6B7B122B3EE7AC00E8FEA3 /* Throttler.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -368,6 +409,7 @@
 		FFEC32842B24779A003E5C04 = {
 			isa = PBXGroup;
 			children = (
+				FF0BF37C2B8A99A5007C74E6 /* OllamaKit */,
 				FFEC328F2B24779A003E5C04 /* Enchanted */,
 				FFEC328E2B24779A003E5C04 /* Products */,
 			);
@@ -392,6 +434,7 @@
 				FF464B142B80BB9C008E5130 /* Helpers */,
 				FFEC32A32B24786D003E5C04 /* Models */,
 				FFEC32992B24779B003E5C04 /* Preview Content */,
+				FF0BF3822B8B4ADD007C74E6 /* Retrieval */,
 				FFEC32A42B247874003E5C04 /* Services */,
 				FF1002422B25BAC50011A4DC /* Stores */,
 				FF1002412B25BAAE0011A4DC /* SwiftData */,
@@ -423,10 +466,11 @@
 				FF2F03432B79631800349855 /* Button+Extension.swift */,
 				FF1002312B2483A20011A4DC /* Colours+Extension.swift */,
 				FF1002672B2668790011A4DC /* Date+Extension.swift */,
+				FFB21A862B7BD0BA00D148A4 /* KeyboardReadable+Extension.swift */,
 				FF1002512B2609970011A4DC /* ModelContext+Extension.swift */,
 				FFBBF48B2B35051D008D611C /* UIImage+Extension.swift */,
 				FFBBF4872B34F9C8008D611C /* View+Extension.swift */,
-				FFB21A862B7BD0BA00D148A4 /* KeyboardReadable+Extension.swift */,
+				FF0BF3872B8B4D0B007C74E6 /* URL+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -438,6 +482,7 @@
 				FF1002722B276EC10011A4DC /* AppColorScheme.swift */,
 				FF7FBE4B2B78E384000901F7 /* SamplePrompt.swift */,
 				FF0BF36C2B8A313B007C74E6 /* DocumentStatus.swift */,
+				FF0BF37A2B8A9007007C74E6 /* LanguageModelProvider.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -450,7 +495,6 @@
 				FF2F03482B796A6500349855 /* HotkeyService.swift */,
 				FF10023D2B24F4900011A4DC /* OllamaService.swift */,
 				FF10024F2B25C79F0011A4DC /* SwiftDataService.swift */,
-				FF6B7B122B3EE7AC00E8FEA3 /* Throttler.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -576,11 +620,13 @@
 				FF15EF6A2B826C0300D4A541 /* SimpleFloatingButton.swift in Sources */,
 				FF24B30E2B66BE8500AB618F /* RunningBorder.swift in Sources */,
 				FF1002602B26499B0011A4DC /* ConversationStatusView.swift in Sources */,
+				FF0BF3812B8AA882007C74E6 /* TextSplitter.swift in Sources */,
 				FF10024C2B25BEA00011A4DC /* MessageSD.swift in Sources */,
 				FF0BF3692B8A3009007C74E6 /* DatabaseSD.swift in Sources */,
 				FF10023E2B24F4900011A4DC /* OllamaService.swift in Sources */,
 				FFBBF48C2B35051D008D611C /* UIImage+Extension.swift in Sources */,
 				FF1002302B2482BA0011A4DC /* ChatMessageView.swift in Sources */,
+				FF0BF3862B8B4B0B007C74E6 /* DataLoader.swift in Sources */,
 				FF1002322B2483A20011A4DC /* Colours+Extension.swift in Sources */,
 				FFB21A872B7BD0BA00D148A4 /* KeyboardReadable+Extension.swift in Sources */,
 				FF33066E2B83CFEC007B33E5 /* KeyboardShortcuts.swift in Sources */,
@@ -609,8 +655,11 @@
 				FFB0327D2B312F3D0066A9DB /* RecordingView.swift in Sources */,
 				FF10024A2B25BE740011A4DC /* LanguageModelSD.swift in Sources */,
 				FF6B7B132B3EE7AC00E8FEA3 /* Throttler.swift in Sources */,
+				FF0BF38E2B8BFA78007C74E6 /* VectorStoreProtocol.swift in Sources */,
 				FF1002402B24F7320011A4DC /* SideBarMenuView.swift in Sources */,
+				FF0BF3882B8B4D0B007C74E6 /* URL+Extension.swift in Sources */,
 				FF9300DE2B782A28000859F4 /* UnreachableAPIView.swift in Sources */,
+				FF0BF37B2B8A9007007C74E6 /* LanguageModelProvider.swift in Sources */,
 				FF9300DC2B7823B0000859F4 /* EmptyConversaitonView.swift in Sources */,
 				FFBBF4882B34F9C8008D611C /* View+Extension.swift in Sources */,
 				FFEC9BE32B81358800AFBA63 /* DeallocPrinter.swift in Sources */,
@@ -629,6 +678,7 @@
 				FF1002542B261D460011A4DC /* MessageListVIew.swift in Sources */,
 				FF10024E2B25C2A70011A4DC /* ConversationSD.swift in Sources */,
 				FFEC32912B24779A003E5C04 /* EnchantedApp.swift in Sources */,
+				FF0BF38B2B8BF852007C74E6 /* EmbeddingsProtocol.swift in Sources */,
 				FF2F03422B795E0B00349855 /* Clipboard.swift in Sources */,
 				FF9300DA2B781D97000859F4 /* ToolbarView_macOS.swift in Sources */,
 				FF1002522B2609980011A4DC /* ModelContext+Extension.swift in Sources */,

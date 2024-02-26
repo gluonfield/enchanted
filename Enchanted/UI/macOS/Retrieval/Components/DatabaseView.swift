@@ -12,7 +12,10 @@ struct DatabaseView: View {
     
     var body: some View {
         Table(documents) {
-            TableColumn("Path", value: \.documentPath)
+            TableColumn("Path") { document in
+                Text(document.documentUrl?.absoluteString ?? "")
+                    .truncationMode(.head)
+            }
             TableColumn("Status") { document in
                 document.status.icon
             }

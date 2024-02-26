@@ -11,16 +11,31 @@ struct RetrievalView: View {
     @Environment(\.presentationMode) var presentationMode
     var databases: [DatabaseSD]
     @Binding var selectedDatabase: DatabaseSD?
+    var languageModels: [LanguageModelSD]
     var documents: [DocumentSD]
-    var onCreateDatabase: (String) -> ()
+    var onCreateDatabase: (String, String) -> ()
+    var onAddDocuments: (UUID, [URL]) -> ()
+    var onIndexDocuments: (UUID) -> ()
     
     @State private var showGuide = false
+    @State private var selectingFiles = false
+    @State private var selectedLanguageModel: LanguageModelSD?
+    
+    private func onIndexDocumentsTap() {
+        guard let selectedDatabase = selectedDatabase, let selectedLanguageModel = selectedLanguageModel else { return }
+        onIndexDocuments(selectedDatabase.id)
+    }
+    
+    private func onCreateDatabaseTap() {
+        guard let selectedLanguageModel = selectedLanguageModel else { return }
+        onCreateDatabase("Hot dog", selectedLanguageModel.name)
+    }
     
     var body: some View {
         VStack {
             ZStack {
                 HStack {
-                    Button(action: {onCreateDatabase("Database dog")}) {
+                    Button(action: onCreateDatabaseTap) {
                         Text("New Database")
                     }
                     
@@ -52,14 +67,6 @@ struct RetrievalView: View {
                     .showIf(databases.isEmpty)
                 
                 HStack {
-                    
-                    Button(action: {}) {
-                        Text("Index files")
-                    }
-                    .showIf(!documents.isEmpty)
-                    
-                    Spacer()
-                    
                     Picker(selection: $selectedDatabase) {
                         ForEach(databases, id:\.self) { database in
                             Text(database.name).tag(Optional(database))
@@ -70,8 +77,13 @@ struct RetrievalView: View {
                             .fontWeight(.regular)
                     }
                     .frame(maxWidth: 300)
-                    .showIf(!databases.isEmpty)
+                    
+                    Text("using " +  (selectedDatabase?.model?.name ?? "Unknown"))
+                    
+                    Spacer()
+                    
                 }
+                .showIf(!databases.isEmpty)
                 
                 DatabaseView(documents: documents)
                     .padding(.top, 20)
@@ -80,13 +92,40 @@ struct RetrievalView: View {
             .padding([.horizontal, .bottom])
             
             HStack {
-                
                 Spacer()
-                Button(action: {}) {
+                Button(action: {selectingFiles.toggle()}) {
                     Text("Import files")
                 }
+                .fileImporter(isPresented: $selectingFiles,
+                              allowedContentTypes: [.directory],
+                              onCompletion: { result in
+                    switch result {
+                    case .success(let url):
+                        guard url.startAccessingSecurityScopedResource() else { return }
+                        
+                        var files = [URL]()
+                        if let enumerator = FileManager.default.enumerator(at: url, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+                            for case let fileURL as URL in enumerator {
+                                do {
+                                    let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
+                                    if fileAttributes.isRegularFile! {
+                                        files.append(fileURL)
+                                    }
+                                    print( try String( contentsOf: fileURL, encoding: String.Encoding.utf8 ))
+                                    print(try fileURL.bookmarkData())
+                                } catch { print(error, fileURL) }
+                            }
+                            print(files)
+                            guard let selectedDatabase = selectedDatabase else { return }
+                            onAddDocuments(selectedDatabase.id, files)
+                        }
+//                        url.stopAccessingSecurityScopedResource()
+                    case .failure(let error):
+                        print(error)
+                    }
+                })
                 
-                Button(action: {}) {
+                Button(action: onIndexDocumentsTap) {
                     Text("Start Indexing")
                 }
                 .buttonStyle(.borderedProminent)
@@ -95,6 +134,9 @@ struct RetrievalView: View {
             .padding()
         }
         .frame(minWidth: 700, maxWidth: 800, minHeight: 500)
+        .onAppear {
+            selectedLanguageModel = languageModels.first
+        }
     }
 }
 
@@ -103,8 +145,11 @@ struct RetrievalView: View {
         databases: DatabaseSD.sample,
         selectedDatabase: .constant(DatabaseSD.sample.first),
         //        documents: DocumentSD
+        languageModels: LanguageModelSD.sample, 
         documents: [],
-        onCreateDatabase: {_ in}
+        onCreateDatabase: {_,_ in},
+        onAddDocuments: {_,_ in},
+        onIndexDocuments: {_ in}
     )
     .frame(width: 700)
 }

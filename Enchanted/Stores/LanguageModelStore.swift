@@ -7,12 +7,13 @@
 
 import Foundation
 import SwiftData
+import Combine
 
 @Observable
 final class LanguageModelStore {
     static let shared = LanguageModelStore(swiftDataService: SwiftDataService.shared)
-    
     private var swiftDataService: SwiftDataService
+    
     var models: [LanguageModelSD] = []
     var supportsImages = false
     var selectedModel: LanguageModelSD?
@@ -64,5 +65,13 @@ final class LanguageModelStore {
     func deleteAllModels() async throws {
         models = []
         try await swiftDataService.deleteModels()
+    }
+    
+    func getEmbedding(model: LanguageModelSD, prompt: String) async -> [Double]? {
+        switch model.provider {
+        case .ollama:
+            let embeddings = await OllamaService.shared.getEmbedding(prompt: prompt, model: model)
+            return embeddings
+        }
     }
 }

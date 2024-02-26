@@ -12,16 +12,18 @@ import SwiftData
 final class DocumentSD: Identifiable {
     @Attribute(.unique) var id: UUID = UUID()
     
-    var documentPath: String
+//    var documentPath: String
+    var documentUrl: URL?
     var updatedAt: Date
     var status: DocumentIndexStatus
 
     @Relationship(deleteRule: .nullify)
     var database: DatabaseSD?
     
-    init(updatedAt: Date = Date.now, documentPath: String, status: DocumentIndexStatus) {
+    init(updatedAt: Date = Date.now, documentUrl: URL, status: DocumentIndexStatus) {
         self.updatedAt = updatedAt
-        self.documentPath = documentPath
+        self.documentUrl = documentUrl
+//        self.documentPath = documentUrl.absoluteString
         self.status = status
     }
 }
@@ -29,9 +31,9 @@ final class DocumentSD: Identifiable {
 // MARK: - Sample
 extension DocumentSD {
     static let sample = [
-        DocumentSD(documentPath: "./files/company_house.pdf", status: .completed),
-        DocumentSD(documentPath: "./files/notes.pdf", status: .indexing),
-        DocumentSD(documentPath: "./files/important.pdf", status: .completed)
+        DocumentSD(documentUrl: URL(string: "./files/company_house.pdf")!, status: .completed),
+        DocumentSD(documentUrl: URL(string: "./files/somedoc.pdf")!, status: .indexing),
+        DocumentSD(documentUrl: URL(string: "./files/important.pdf")!, status: .completed)
     ]
 }
 

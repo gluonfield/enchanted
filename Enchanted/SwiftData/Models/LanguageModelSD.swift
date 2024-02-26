@@ -16,8 +16,11 @@ final class LanguageModelSD: Identifiable {
     @Relationship(deleteRule: .cascade, inverse: \ConversationSD.model)
     var conversations: [ConversationSD]? = []
     
-    init(name: String) {
+    var provider: LanguageModelProvider
+    
+    init(name: String, provider: LanguageModelProvider = .ollama) {
         self.name = name
+        self.provider = provider
     }
     
     @Transient var isNotAvailable: Bool {

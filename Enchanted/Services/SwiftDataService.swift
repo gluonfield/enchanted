@@ -131,8 +131,10 @@ extension SwiftDataService {
 
 // MARK: - Database
 extension SwiftDataService {
-    func createDatabase(name: String, indexPath: String) throws {
+    func createDatabase(name: String, indexPath: String, languageModelName: String) throws {
         let db = DatabaseSD(name: name, indexPath: indexPath)
+        guard let llm = try? fetchModels().filter({$0.name == languageModelName}).first else { return }
+        db.model = llm
         self.modelContext.insert(db)
         try modelContext.saveChanges()
     }
@@ -141,6 +143,13 @@ extension SwiftDataService {
         let sortDescriptor = SortDescriptor(\DatabaseSD.updatedAt, order: .reverse)
         let fetchDescriptor = FetchDescriptor<DatabaseSD>(sortBy: [sortDescriptor])
         return try modelContext.fetch(fetchDescriptor)
+    }
+    
+    func databaseAttachDocuments(db: DatabaseSD, paths: [URL]) throws {
+        let docs = paths.map({DocumentSD(documentUrl: $0, status: .indexing)})
+        db.documents = docs
+        db.updatedAt = .now
+        try modelContext.saveChanges()
     }
 }
 
