@@ -13,12 +13,25 @@ struct DatabaseView: View {
     var body: some View {
         Table(documents) {
             TableColumn("Path") { document in
-                Text(document.documentUrl?.absoluteString ?? "")
-                    .truncationMode(.head)
+                    Text(document.documentUrl?.absoluteString ?? "")
+                        .truncationMode(.head)
             }
+            .alignment(.trailing)
             TableColumn("Status") { document in
-                document.status.icon
+                HStack {
+                    Spacer()
+                    Group {
+                        if document.status == .indexing {
+                            CircularProgressView(progress: document.indexProgress ?? 0)
+                                .frame(width: 13, height: 13, alignment: .center)
+                        } else {
+                            IndexingStatusView(status: document.status)
+                        }
+                    }
+                    Spacer()
+                }
             }
+            .width(min: 50, max: 50)
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 @Observable
 final class RetrievalStore {
@@ -14,10 +15,14 @@ final class RetrievalStore {
     
     var databases: [DatabaseSD] = []
     var selectedDatabase: DatabaseSD?
+    var indexStore: SimpleVectorStore?
     
     let splitter = SimpleTextSplitter()
     let dataLoader = DataLoader()
-
+    
+    // Indexing state
+    var progress: Double?
+    
     init(swiftDataService: SwiftDataService) {
         self.swiftDataService = swiftDataService
     }
@@ -38,33 +43,45 @@ final class RetrievalStore {
         try await getDatabases()
     }
     
-    func indexDocuments(databaseId: UUID) async throws {
+    func indexDocuments(databaseId: UUID, callback: @escaping @Sendable (_ documentsListProgress: Double) -> ()?) async throws {
+        print("index called")
         guard let db = databases.filter({$0.id == databaseId}).first else { return }
         guard let languageModel = db.model else { return }
         let documents = db.documents?.filter({$0.status != .completed}) ?? []
-        for document in documents {
+        for (index, document) in documents.enumerated() {
+            let documentsListProgress = Double(index)/Double(documents.count)
+            
             print("calculate embeddings for \(String(describing: document.documentUrl?.absoluteString)) using model \(languageModel.name)")
             
-            guard let url = document.documentUrl else {
-                print("skipped")
-                continue
-            }
-            guard let fileContents = dataLoader.from(url) else {
-                print("Skipped")
+            try await swiftDataService.updateDocumentStatus(document: document, status: .indexing)
+            
+            guard let url = document.documentUrl, let fileContents = dataLoader.from(url) else {
+                try await swiftDataService.updateDocumentStatus(document: document, status: .failed)
                 continue
             }
             
             let chunks = splitter.split(text: fileContents, maxChunkSize: 510)
-            for chunk in chunks {
-                print("chunk")
-                print(chunk.count)
-            }
             
-            for chunk in chunks {
+            indexStore = SimpleVectorStore()
+            
+            for (chunkIndex, chunk) in chunks.enumerated() {
                 if let embedding = await LanguageModelStore.shared.getEmbedding(model: languageModel, prompt: chunk) {
-                    print(embedding.count)
+                    indexStore?.upsert(embedding: embedding, text: chunk)
+                    let documentProgress = Double(chunkIndex)/Double(chunks.count)
+                    callback(documentsListProgress)
+                    DispatchQueue.main.async {
+                        document.indexProgress = documentProgress
+                    }
+                    print("embedding calculated")
                 }
             }
+            
+            
+            try await swiftDataService.updateDocumentStatus(document: document, status: .completed)
+            
         }
+        
+        /// completed
+        callback(1.0)
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct Retrieval: View {
     @State var retrievalStore = RetrievalStore.shared
     @State var languageModelStore = LanguageModelStore.shared
+    @State var documentsIndexProgress: Double = 0
     
     func createDatabase(name: String, languageModelName: String) {
         Task {
@@ -23,9 +24,18 @@ struct Retrieval: View {
         }
     }
     
-    func indexDocuments(databaseId: UUID) {
+    @MainActor func indexDocuments(databaseId: UUID) {
         Task {
-            try? await retrievalStore.indexDocuments(databaseId: databaseId)
+            do {
+                try await retrievalStore.indexDocuments(databaseId: databaseId) { documentsListProgress in
+                    withAnimation {
+                        self.documentsIndexProgress = documentsListProgress
+                    }
+                }
+            } catch {
+                
+                print("Error indexing documents: \(error)")
+            }
         }
     }
     
@@ -33,11 +43,12 @@ struct Retrieval: View {
         RetrievalView(
             databases: retrievalStore.databases,
             selectedDatabase: $retrievalStore.selectedDatabase,
-            languageModels: languageModelStore.models, 
+            languageModels: languageModelStore.models,
             documents: retrievalStore.selectedDatabase?.documents ?? [],
             onCreateDatabase: createDatabase,
             onAddDocuments: onAddDocuments,
-            onIndexDocuments: indexDocuments
+            onIndexDocuments: indexDocuments,
+            documentsProgress: documentsIndexProgress
         )
     }
 }

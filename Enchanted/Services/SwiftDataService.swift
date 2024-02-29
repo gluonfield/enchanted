@@ -146,9 +146,18 @@ extension SwiftDataService {
     }
     
     func databaseAttachDocuments(db: DatabaseSD, paths: [URL]) throws {
-        let docs = paths.map({DocumentSD(documentUrl: $0, status: .indexing)})
+        let docs = paths.map({DocumentSD(documentUrl: $0, status: .notStarted)})
         db.documents = docs
         db.updatedAt = .now
+        try modelContext.saveChanges()
+    }
+}
+
+// MARK: - Documents
+extension SwiftDataService {
+    func updateDocumentStatus(document: DocumentSD, status: DocumentIndexStatus) throws {
+        document.status = status
+        document.updatedAt = .now
         try modelContext.saveChanges()
     }
 }

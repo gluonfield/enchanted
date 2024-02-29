@@ -16,13 +16,14 @@ struct RetrievalView: View {
     var onCreateDatabase: (String, String) -> ()
     var onAddDocuments: (UUID, [URL]) -> ()
     var onIndexDocuments: (UUID) -> ()
+    var documentsProgress: Double
     
     @State private var showGuide = false
     @State private var selectingFiles = false
     @State private var selectedLanguageModel: LanguageModelSD?
     
     private func onIndexDocumentsTap() {
-        guard let selectedDatabase = selectedDatabase, let selectedLanguageModel = selectedLanguageModel else { return }
+        guard let selectedDatabase = selectedDatabase, let _ = selectedLanguageModel else { return }
         onIndexDocuments(selectedDatabase.id)
     }
     
@@ -111,8 +112,6 @@ struct RetrievalView: View {
                                     if fileAttributes.isRegularFile! {
                                         files.append(fileURL)
                                     }
-                                    print( try String( contentsOf: fileURL, encoding: String.Encoding.utf8 ))
-                                    print(try fileURL.bookmarkData())
                                 } catch { print(error, fileURL) }
                             }
                             print(files)
@@ -132,10 +131,19 @@ struct RetrievalView: View {
                 
             }
             .padding()
+            
+            HStack {
+                ProgressView(value: documentsProgress)
+            }
+//            .showIf(documentsProgress)
+            .padding()
         }
         .frame(minWidth: 700, maxWidth: 800, minHeight: 500)
         .onAppear {
             selectedLanguageModel = languageModels.first
+        }
+        .onChange(of: documentsProgress) { oldValue, newValue in
+            print(oldValue, newValue, "changed")
         }
     }
 }
@@ -144,12 +152,12 @@ struct RetrievalView: View {
     RetrievalView(
         databases: DatabaseSD.sample,
         selectedDatabase: .constant(DatabaseSD.sample.first),
-        //        documents: DocumentSD
-        languageModels: LanguageModelSD.sample, 
-        documents: [],
+        languageModels: LanguageModelSD.sample,
+        documents: DocumentSD.sample,
         onCreateDatabase: {_,_ in},
         onAddDocuments: {_,_ in},
-        onIndexDocuments: {_ in}
+        onIndexDocuments: {_ in},
+        documentsProgress: 0.5
     )
     .frame(width: 700)
 }

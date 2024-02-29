@@ -22,7 +22,7 @@
 		FF0BF3862B8B4B0B007C74E6 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF3852B8B4B0B007C74E6 /* DataLoader.swift */; };
 		FF0BF3882B8B4D0B007C74E6 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF3872B8B4D0B007C74E6 /* URL+Extension.swift */; };
 		FF0BF38B2B8BF852007C74E6 /* EmbeddingsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF38A2B8BF852007C74E6 /* EmbeddingsProtocol.swift */; };
-		FF0BF38E2B8BFA78007C74E6 /* VectorStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF38D2B8BFA78007C74E6 /* VectorStoreProtocol.swift */; };
+		FF0BF38E2B8BFA78007C74E6 /* VectorDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0BF38D2B8BFA78007C74E6 /* VectorDatabase.swift */; };
 		FF1002302B2482BA0011A4DC /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF10022F2B2482BA0011A4DC /* ChatMessageView.swift */; };
 		FF1002322B2483A20011A4DC /* Colours+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1002312B2483A20011A4DC /* Colours+Extension.swift */; };
 		FF1002392B24BBF20011A4DC /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1002382B24BBF20011A4DC /* Chat.swift */; };
@@ -62,15 +62,25 @@
 		FF38F8582B7AB1AD00546B56 /* PanelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38F8572B7AB1AD00546B56 /* PanelManager.swift */; };
 		FF38F85A2B7AB28300546B56 /* PromptPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38F8592B7AB28300546B56 /* PromptPanelView.swift */; };
 		FF38F85C2B7ABC2C00546B56 /* PromptPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38F85B2B7ABC2C00546B56 /* PromptPanel.swift */; };
+		FF3E935B2B8E8104008DE293 /* CircularProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E935A2B8E8104008DE293 /* CircularProgressIndicator.swift */; };
 		FF5FA0D62B35169400BC471D /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FA0D52B35169400BC471D /* Binding+Extension.swift */; };
+		FF6268852B8D28B5006E0632 /* IndexValuePair.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6268842B8D28B5006E0632 /* IndexValuePair.swift */; };
+		FF6268872B8D3A24006E0632 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6268862B8D3A24006E0632 /* General.swift */; };
 		FF66A51D2B76949A00FAAC1E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66A51C2B76949A00FAAC1E /* Helpers.swift */; };
 		FF6B7B132B3EE7AC00E8FEA3 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6B7B122B3EE7AC00E8FEA3 /* Throttler.swift */; };
+		FF6D820B2B8FB4F4001183A8 /* IndexingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6D820A2B8FB4F4001183A8 /* IndexingStatusView.swift */; };
 		FF7FBE4C2B78E384000901F7 /* SamplePrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FBE4B2B78E384000901F7 /* SamplePrompt.swift */; };
 		FF9300D42B778829000859F4 /* ChatView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9300D32B778829000859F4 /* ChatView_macOS.swift */; };
 		FF9300DA2B781D97000859F4 /* ToolbarView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9300D92B781D97000859F4 /* ToolbarView_macOS.swift */; };
 		FF9300DC2B7823B0000859F4 /* EmptyConversaitonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9300DB2B7823B0000859F4 /* EmptyConversaitonView.swift */; };
 		FF9300DE2B782A28000859F4 /* UnreachableAPIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9300DD2B782A28000859F4 /* UnreachableAPIView.swift */; };
 		FF9300E02B783945000859F4 /* InputFields_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9300DF2B783945000859F4 /* InputFields_macOS.swift */; };
+		FFA57C0D2B8D0F41009B53A7 /* SImpleVectorDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA57C0C2B8D0F41009B53A7 /* SImpleVectorDatabase.swift */; };
+		FFA57C172B8D2109009B53A7 /* BitCollections in Frameworks */ = {isa = PBXBuildFile; productRef = FFA57C162B8D2109009B53A7 /* BitCollections */; };
+		FFA57C192B8D2109009B53A7 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = FFA57C182B8D2109009B53A7 /* Collections */; };
+		FFA57C1B2B8D2109009B53A7 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = FFA57C1A2B8D2109009B53A7 /* DequeModule */; };
+		FFA57C1D2B8D2109009B53A7 /* HashTreeCollections in Frameworks */ = {isa = PBXBuildFile; productRef = FFA57C1C2B8D2109009B53A7 /* HashTreeCollections */; };
+		FFA57C1F2B8D2109009B53A7 /* HeapModule in Frameworks */ = {isa = PBXBuildFile; productRef = FFA57C1E2B8D2109009B53A7 /* HeapModule */; };
 		FFB0327D2B312F3D0066A9DB /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB0327C2B312F3D0066A9DB /* RecordingView.swift */; };
 		FFB21A872B7BD0BA00D148A4 /* KeyboardReadable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB21A862B7BD0BA00D148A4 /* KeyboardReadable+Extension.swift */; };
 		FFBBF4842B34881B008D611C /* SpeechRecogniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBBF4832B34881B008D611C /* SpeechRecogniser.swift */; };
@@ -107,7 +117,7 @@
 		FF0BF3852B8B4B0B007C74E6 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		FF0BF3872B8B4D0B007C74E6 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
 		FF0BF38A2B8BF852007C74E6 /* EmbeddingsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddingsProtocol.swift; sourceTree = "<group>"; };
-		FF0BF38D2B8BFA78007C74E6 /* VectorStoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorStoreProtocol.swift; sourceTree = "<group>"; };
+		FF0BF38D2B8BFA78007C74E6 /* VectorDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorDatabase.swift; sourceTree = "<group>"; };
 		FF10022F2B2482BA0011A4DC /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
 		FF1002312B2483A20011A4DC /* Colours+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colours+Extension.swift"; sourceTree = "<group>"; };
 		FF1002382B24BBF20011A4DC /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -144,15 +154,20 @@
 		FF38F8572B7AB1AD00546B56 /* PanelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelManager.swift; sourceTree = "<group>"; };
 		FF38F8592B7AB28300546B56 /* PromptPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptPanelView.swift; sourceTree = "<group>"; };
 		FF38F85B2B7ABC2C00546B56 /* PromptPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptPanel.swift; sourceTree = "<group>"; };
+		FF3E935A2B8E8104008DE293 /* CircularProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressIndicator.swift; sourceTree = "<group>"; };
 		FF5FA0D52B35169400BC471D /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
+		FF6268842B8D28B5006E0632 /* IndexValuePair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexValuePair.swift; sourceTree = "<group>"; };
+		FF6268862B8D3A24006E0632 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		FF66A51C2B76949A00FAAC1E /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		FF6B7B122B3EE7AC00E8FEA3 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
+		FF6D820A2B8FB4F4001183A8 /* IndexingStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexingStatusView.swift; sourceTree = "<group>"; };
 		FF7FBE4B2B78E384000901F7 /* SamplePrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePrompt.swift; sourceTree = "<group>"; };
 		FF9300D32B778829000859F4 /* ChatView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView_macOS.swift; sourceTree = "<group>"; };
 		FF9300D92B781D97000859F4 /* ToolbarView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView_macOS.swift; sourceTree = "<group>"; };
 		FF9300DB2B7823B0000859F4 /* EmptyConversaitonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyConversaitonView.swift; sourceTree = "<group>"; };
 		FF9300DD2B782A28000859F4 /* UnreachableAPIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreachableAPIView.swift; sourceTree = "<group>"; };
 		FF9300DF2B783945000859F4 /* InputFields_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFields_macOS.swift; sourceTree = "<group>"; };
+		FFA57C0C2B8D0F41009B53A7 /* SImpleVectorDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SImpleVectorDatabase.swift; sourceTree = "<group>"; };
 		FFB0327C2B312F3D0066A9DB /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
 		FFB21A862B7BD0BA00D148A4 /* KeyboardReadable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardReadable+Extension.swift"; sourceTree = "<group>"; };
 		FFBBF4822B348345008D611C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -178,9 +193,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFA57C192B8D2109009B53A7 /* Collections in Frameworks */,
 				FFD5FAD52B8130CE0055AB51 /* OllamaKit in Frameworks */,
 				FFD5FAD22B8130490055AB51 /* Vortex in Frameworks */,
+				FFA57C172B8D2109009B53A7 /* BitCollections in Frameworks */,
 				FF10027A2B27B6070011A4DC /* MarkdownUI in Frameworks */,
+				FFA57C1B2B8D2109009B53A7 /* DequeModule in Frameworks */,
+				FFA57C1F2B8D2109009B53A7 /* HeapModule in Frameworks */,
+				FFA57C1D2B8D2109009B53A7 /* HashTreeCollections in Frameworks */,
 				FF1002662B2653EE0011A4DC /* ActivityIndicatorView in Frameworks */,
 				FF2F03722B79743400349855 /* Magnet in Frameworks */,
 			);
@@ -204,6 +224,7 @@
 				FF0BF3632B8A2899007C74E6 /* RetrievalView.swift */,
 				FF0BF3662B8A2FF2007C74E6 /* DatabaseView.swift */,
 				FF0BF3752B8A6995007C74E6 /* EmptyDatabaseView.swift */,
+				FF6D820A2B8FB4F4001183A8 /* IndexingStatusView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -230,7 +251,9 @@
 		FF0BF38C2B8BFA68007C74E6 /* VectorStore */ = {
 			isa = PBXGroup;
 			children = (
-				FF0BF38D2B8BFA78007C74E6 /* VectorStoreProtocol.swift */,
+				FF0BF38D2B8BFA78007C74E6 /* VectorDatabase.swift */,
+				FFA57C0C2B8D0F41009B53A7 /* SImpleVectorDatabase.swift */,
+				FF6268842B8D28B5006E0632 /* IndexValuePair.swift */,
 			);
 			path = VectorStore;
 			sourceTree = "<group>";
@@ -316,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				FF15EF692B826C0300D4A541 /* SimpleFloatingButton.swift */,
+				FF3E935A2B8E8104008DE293 /* CircularProgressIndicator.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -347,6 +371,7 @@
 				FFEC9BDE2B8131B900AFBA63 /* HotKeys.swift */,
 				FFE21C772B82353A00A69B9C /* SleepTest.swift */,
 				FF6B7B122B3EE7AC00E8FEA3 /* Throttler.swift */,
+				FF6268862B8D3A24006E0632 /* General.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -553,6 +578,11 @@
 				FF2F03712B79743400349855 /* Magnet */,
 				FF464B122B8026DA008E5130 /* Vortex */,
 				FFD5FAD42B8130CE0055AB51 /* OllamaKit */,
+				FFA57C162B8D2109009B53A7 /* BitCollections */,
+				FFA57C182B8D2109009B53A7 /* Collections */,
+				FFA57C1A2B8D2109009B53A7 /* DequeModule */,
+				FFA57C1C2B8D2109009B53A7 /* HashTreeCollections */,
+				FFA57C1E2B8D2109009B53A7 /* HeapModule */,
 			);
 			productName = Enchanted;
 			productReference = FFEC328D2B24779A003E5C04 /* Enchanted.app */;
@@ -588,6 +618,7 @@
 				FF2F03702B79743400349855 /* XCRemoteSwiftPackageReference "Magnet" */,
 				FF464B112B8026DA008E5130 /* XCRemoteSwiftPackageReference "Vortex" */,
 				FFD5FAD32B8130CE0055AB51 /* XCRemoteSwiftPackageReference "OllamaKit" */,
+				FFA57C152B8D2109009B53A7 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = FFEC328E2B24779A003E5C04 /* Products */;
 			projectDirPath = "";
@@ -623,10 +654,12 @@
 				FF0BF3812B8AA882007C74E6 /* TextSplitter.swift in Sources */,
 				FF10024C2B25BEA00011A4DC /* MessageSD.swift in Sources */,
 				FF0BF3692B8A3009007C74E6 /* DatabaseSD.swift in Sources */,
+				FF6D820B2B8FB4F4001183A8 /* IndexingStatusView.swift in Sources */,
 				FF10023E2B24F4900011A4DC /* OllamaService.swift in Sources */,
 				FFBBF48C2B35051D008D611C /* UIImage+Extension.swift in Sources */,
 				FF1002302B2482BA0011A4DC /* ChatMessageView.swift in Sources */,
 				FF0BF3862B8B4B0B007C74E6 /* DataLoader.swift in Sources */,
+				FF6268872B8D3A24006E0632 /* General.swift in Sources */,
 				FF1002322B2483A20011A4DC /* Colours+Extension.swift in Sources */,
 				FFB21A872B7BD0BA00D148A4 /* KeyboardReadable+Extension.swift in Sources */,
 				FF33066E2B83CFEC007B33E5 /* KeyboardShortcuts.swift in Sources */,
@@ -639,6 +672,7 @@
 				FF2F03492B796A6500349855 /* HotkeyService.swift in Sources */,
 				FF9300E02B783945000859F4 /* InputFields_macOS.swift in Sources */,
 				FF38F8562B7AB01E00546B56 /* FloatingPanel.swift in Sources */,
+				FF3E935B2B8E8104008DE293 /* CircularProgressIndicator.swift in Sources */,
 				FF0146CB2B3DA1DF00A2A9F6 /* Settings.swift in Sources */,
 				FF38F8532B7AA9C400546B56 /* ApplicationEntry.swift in Sources */,
 				FF38F85C2B7ABC2C00546B56 /* PromptPanel.swift in Sources */,
@@ -653,9 +687,10 @@
 				FF10025C2B2625BE0011A4DC /* SidebarView.swift in Sources */,
 				FF1002392B24BBF20011A4DC /* Chat.swift in Sources */,
 				FFB0327D2B312F3D0066A9DB /* RecordingView.swift in Sources */,
+				FFA57C0D2B8D0F41009B53A7 /* SImpleVectorDatabase.swift in Sources */,
 				FF10024A2B25BE740011A4DC /* LanguageModelSD.swift in Sources */,
 				FF6B7B132B3EE7AC00E8FEA3 /* Throttler.swift in Sources */,
-				FF0BF38E2B8BFA78007C74E6 /* VectorStoreProtocol.swift in Sources */,
+				FF0BF38E2B8BFA78007C74E6 /* VectorDatabase.swift in Sources */,
 				FF1002402B24F7320011A4DC /* SideBarMenuView.swift in Sources */,
 				FF0BF3882B8B4D0B007C74E6 /* URL+Extension.swift in Sources */,
 				FF9300DE2B782A28000859F4 /* UnreachableAPIView.swift in Sources */,
@@ -674,6 +709,7 @@
 				FF38F8582B7AB1AD00546B56 /* PanelManager.swift in Sources */,
 				FF10025A2B2624C40011A4DC /* ConversationHistoryListView.swift in Sources */,
 				FF10026D2B2751760011A4DC /* SettingsView.swift in Sources */,
+				FF6268852B8D28B5006E0632 /* IndexValuePair.swift in Sources */,
 				FF33066C2B83BB31007B33E5 /* SidebarButton.swift in Sources */,
 				FF1002542B261D460011A4DC /* MessageListVIew.swift in Sources */,
 				FF10024E2B25C2A70011A4DC /* ConversationSD.swift in Sources */,
@@ -754,6 +790,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 			};
 			name = Debug;
 		};
@@ -808,6 +845,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 			};
 			name = Release;
 		};
@@ -959,6 +997,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		FFA57C152B8D2109009B53A7 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				branch = release/1.1;
+				kind = branch;
+			};
+		};
 		FFD5FAD32B8130CE0055AB51 /* XCRemoteSwiftPackageReference "OllamaKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AugustDev/OllamaKit";
@@ -989,6 +1035,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF464B112B8026DA008E5130 /* XCRemoteSwiftPackageReference "Vortex" */;
 			productName = Vortex;
+		};
+		FFA57C162B8D2109009B53A7 /* BitCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFA57C152B8D2109009B53A7 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = BitCollections;
+		};
+		FFA57C182B8D2109009B53A7 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFA57C152B8D2109009B53A7 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		FFA57C1A2B8D2109009B53A7 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFA57C152B8D2109009B53A7 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		FFA57C1C2B8D2109009B53A7 /* HashTreeCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFA57C152B8D2109009B53A7 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = HashTreeCollections;
+		};
+		FFA57C1E2B8D2109009B53A7 /* HeapModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFA57C152B8D2109009B53A7 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = HeapModule;
 		};
 		FFD5FAD42B8130CE0055AB51 /* OllamaKit */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -12,10 +12,10 @@ import SwiftData
 final class DocumentSD: Identifiable {
     @Attribute(.unique) var id: UUID = UUID()
     
-//    var documentPath: String
     var documentUrl: URL?
     var updatedAt: Date
     var status: DocumentIndexStatus
+    var indexProgress: Double?
 
     @Relationship(deleteRule: .nullify)
     var database: DatabaseSD?
@@ -23,8 +23,8 @@ final class DocumentSD: Identifiable {
     init(updatedAt: Date = Date.now, documentUrl: URL, status: DocumentIndexStatus) {
         self.updatedAt = updatedAt
         self.documentUrl = documentUrl
-//        self.documentPath = documentUrl.absoluteString
         self.status = status
+        self.indexProgress = 0
     }
 }
 

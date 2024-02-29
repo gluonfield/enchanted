@@ -31,7 +31,9 @@ extension DocumentIndexStatus {
         case .indexing: return Image(systemName: "hourglass.circle").foregroundColor(.indigo)
         case .completed: return Image(systemName: "checkmark.circle").foregroundColor(.green)
         case .notStarted: return Image(systemName: "hourglass.circle").foregroundColor(.yellow)
-        case .failed: return Image(systemName: "circle.slash").foregroundColor(.green)
+        case .failed: return Image(systemName: "circle.slash").foregroundColor(.red)
         }
     }
 }
+
+

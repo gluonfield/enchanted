@@ -29,7 +29,7 @@ struct Settings: View {
         
         OllamaService.shared.initEndpoint(url: ollamaUri)
         Task {
-            Haptics.shared.mediumTap()
+            await Haptics.shared.mediumTap()
             try? await languageModelStore.loadModels()
         }
         presentationMode.wrappedValue.dismiss()

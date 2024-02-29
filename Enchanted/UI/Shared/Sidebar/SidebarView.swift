@@ -17,9 +17,9 @@ struct SidebarView: View {
     @State private var showRetrieval = false
     
     private func onSettingsTap() {
+        showSettings.toggle()
         Task {
-            showSettings.toggle() 
-            Haptics.shared.mediumTap()
+            await Haptics.shared.mediumTap()
         }
     }
     

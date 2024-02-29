@@ -51,6 +51,10 @@ struct DataLoader {
             return fromTextFile(url)
         } else if mimeType == "application/pdf" {
             return fromPDF(url)
+        } else if mimeType == "application/octet-stream" {
+            return fromTextFile(url)
+        } else if mimeType == "application/x-yaml" {
+            return fromTextFile(url)
         }
         
         print("unhandled mime type \(mimeType) for \(url.absoluteString)")

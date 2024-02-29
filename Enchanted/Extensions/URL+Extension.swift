@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Collections
 import UniformTypeIdentifiers
 
 extension URL {
