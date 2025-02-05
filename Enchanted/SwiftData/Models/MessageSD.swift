@@ -12,7 +12,45 @@ import SwiftData
 final class MessageSD: Identifiable {
     @Attribute(.unique) var id: UUID = UUID()
     
+    var think: String? {
+        if content.contains("<think>") {
+            if content.contains("</think>") {
+                let tmps = content.components(separatedBy: "</think>")
+                if tmps.count > 1 {
+                    return tmps[0].replacingOccurrences(of: "<think>", with: "")
+                }
+            }
+            return content.replacingOccurrences(of: "<think>", with: "")
+        }
+        return nil
+    }
+    var hasThink: Bool {
+        if content.contains("<think>") {
+            return true
+        }
+        return false
+    }
+    var thinkComplete: Bool {
+        if content.contains("<think>") {
+            if content.contains("</think>") {
+                return true
+            }
+        }
+        return false
+    }
     var content: String
+    var realContent: String? {
+        if content.contains("<think>") {
+            if content.contains("</think>") {
+                let tmps = content.components(separatedBy: "</think>")
+                if tmps.count > 1 {
+                    return tmps[1]
+                }
+            }
+            return nil
+        }
+        return content
+    }
     var role: String
     var done: Bool = false
     var error: Bool = false
