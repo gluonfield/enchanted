@@ -31,35 +31,41 @@ class SpeechSynthesizerDelegate: NSObject, AVSpeechSynthesizerDelegate {
     static let shared = SpeechSynthesizer()
     private let synthesizer = AVSpeechSynthesizer()
     private let delegate = SpeechSynthesizerDelegate()
-    
+
     @Published var isSpeaking = false
     @Published var voices: [AVSpeechSynthesisVoice] = []
-    
+
     override init() {
         super.init()
         synthesizer.delegate = delegate
         fetchVoices()
     }
-    
+
+    static func systemDefaultVoiceIdentifier() -> String {
+        // Type system says this might be nil, but documentation says we'll receive
+        // the default voice for the system's language & region
+        return AVSpeechSynthesisVoice(language: nil)?.identifier ?? ""
+    }
+
     func getVoiceIdentifier() -> String? {
         let voiceIdentifier = UserDefaults.standard.string(forKey: "voiceIdentifier")
         if let voice = voices.first(where: {$0.identifier == voiceIdentifier}) {
             return voice.identifier
         }
-        
-        return voices.first?.identifier
+
+        return SpeechSynthesizer.systemDefaultVoiceIdentifier()
     }
-    
+
     var lastCancelation: (()->Void)? = {}
-    
+
     func speak(text: String, onFinished: @escaping () -> Void = {}) async {
         guard let voiceIdentifier = getVoiceIdentifier() else {
             print("could not find identifier")
             return
         }
-        
+
         print("selected", voiceIdentifier)
-        
+
 #if os(iOS)
         let audioSession = AVAudioSession()
         do {

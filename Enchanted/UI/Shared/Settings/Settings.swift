@@ -21,8 +21,8 @@ struct Settings: View {
     @AppStorage("ollamaBearerToken") private var ollamaBearerToken: String = ""
     @AppStorage("appUserInitials") private var appUserInitials: String = ""
     @AppStorage("pingInterval") private var pingInterval: String = "5"
-    @AppStorage("voiceIdentifier") private var voiceIdentifier: String = ""
-    
+    @AppStorage("voiceIdentifier") private var voiceIdentifier: String = SpeechSynthesizer.systemDefaultVoiceIdentifier()
+
     @StateObject private var speechSynthesiser = SpeechSynthesizer.shared
     
     @Environment(\.presentationMode) var presentationMode
