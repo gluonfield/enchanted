@@ -1,5 +1,5 @@
 {
-  "originHash" : "2ecdf9d081540d56a3d35c3ac234eabac50668e7cc364d29a44a05e51449bba1",
+  "originHash" : "a828c57bb38e56bc4d70b841d1884d7217e063fbe9ad3dd2f867b7f5b7b2822c",
   "pins" : [
     {
       "identity" : "activityindicatorview",
@@ -94,10 +94,10 @@
     {
       "identity" : "swift-markdown-ui",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/AugustDev/swift-markdown-ui",
+      "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
       "state" : {
-        "branch" : "main",
-        "revision" : "acb83e45394334a04ba0cf3487e4d07f4709eeb4"
+        "revision" : "55441810c0f678c78ed7e2ebd46dde89228e02fc",
+        "version" : "2.4.0"
       }
     },
     {
