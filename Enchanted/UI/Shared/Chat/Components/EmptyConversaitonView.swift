@@ -47,18 +47,18 @@ struct EmptyConversaitonView: View, KeyboardReadable {
                             )
                         )
                     
-                    Button(action: onFreysaTap) {
-                        Text("by FREYSA")
-                            .font(.system(size: isHovering ? 19 : 17, weight: .light))
-                            .scaleEffect(isHovering ? 1.05 : 1.0)
-                            .opacity(isHovering ? 0.8 : 1.0)
-                            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isHovering)
-
-                    }
-                    .buttonStyle(.plain)
-                    .onHover { hovering in
-                                isHovering = hovering
-                            }
+//                    Button(action: onFreysaTap) {
+//                        Text("by FREYSA")
+//                            .font(.system(size: isHovering ? 19 : 17, weight: .light))
+//                            .scaleEffect(isHovering ? 1.05 : 1.0)
+//                            .opacity(isHovering ? 0.8 : 1.0)
+//                            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isHovering)
+//
+//                    }
+//                    .buttonStyle(.plain)
+//                    .onHover { hovering in
+//                                isHovering = hovering
+//                            }
                 }
                 
                 LazyVGrid(columns: columns, alignment: .leading, spacing: 15) {

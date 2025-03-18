@@ -108,7 +108,7 @@ struct ChatView: View {
                 }
                 #else
                 ToolbarItem(placement: .navigation) {
-                    Text("Enchanted by Freysa")
+                    Text("Enchanted")
                 }
                 #endif
 
