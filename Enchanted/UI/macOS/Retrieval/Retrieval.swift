@@ -48,7 +48,8 @@ struct Retrieval: View {
             onCreateDatabase: createDatabase,
             onAddDocuments: onAddDocuments,
             onIndexDocuments: indexDocuments,
-            documentsProgress: documentsIndexProgress
+            documentsProgress: documentsIndexProgress,
+            selectedLanguageModel: LanguageModelStore.shared.selectedModel
         )
     }
 }

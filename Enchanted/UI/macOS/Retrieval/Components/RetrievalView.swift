@@ -20,7 +20,7 @@ struct RetrievalView: View {
     
     @State private var showGuide = false
     @State private var selectingFiles = false
-    @State private var selectedLanguageModel: LanguageModelSD?
+    var selectedLanguageModel: LanguageModelSD?
     
     private func onIndexDocumentsTap() {
         guard let selectedDatabase = selectedDatabase, let _ = selectedLanguageModel else { return }
@@ -139,9 +139,6 @@ struct RetrievalView: View {
             .padding()
         }
         .frame(minWidth: 700, maxWidth: 800, minHeight: 500)
-        .onAppear {
-            selectedLanguageModel = languageModels.first
-        }
         .onChange(of: documentsProgress) { oldValue, newValue in
             print(oldValue, newValue, "changed")
         }

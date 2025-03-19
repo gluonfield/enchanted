@@ -46,7 +46,6 @@ extension SwiftDataService {
         let sortDescriptor = SortDescriptor(\LanguageModelSD.name)
         let fetchDescriptor = FetchDescriptor<LanguageModelSD>(sortBy: [sortDescriptor])
         let models = try modelContext.fetch(fetchDescriptor)
-        
         return models
     }
     

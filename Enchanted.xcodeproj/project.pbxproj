@@ -977,8 +977,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 		FF2F03702B79743400349855 /* XCRemoteSwiftPackageReference "Magnet" */ = {
