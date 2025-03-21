@@ -107,7 +107,7 @@ final class ConversationStore: Sendable {
     }
     
     @MainActor
-    func sendPrompt(userPrompt: String, model: LanguageModelSD, image: Image? = nil, systemPrompt: String = "", trimmingMessageId: String? = nil) {
+    func sendPrompt(userPrompt: String, embeddedPrompt: String? = "", model: LanguageModelSD, image: Image? = nil, systemPrompt: String = "", trimmingMessageId: String? = nil) {
         guard userPrompt.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 else { return }
         
         let conversation = selectedConversation ?? ConversationSD(name: userPrompt)
@@ -130,15 +130,25 @@ final class ConversationStore: Sendable {
             systemMessage.conversation = conversation
         }
         
+        /// Combine userPrompt and embedPrompt if embedPrompt is not empty
+        let combinedPrompt = embeddedPrompt?.isEmpty == false ?
+            "\(userPrompt)\n\nContext:\n\(embeddedPrompt!)" : userPrompt
+        
         /// construct new message
-        let userMessage = MessageSD(content: userPrompt, role: "user", image: image?.render()?.compressImageData())
+        let userMessage = MessageSD(content: userPrompt, prompt: combinedPrompt, role: "user", image: image?.render()?.compressImageData())
         userMessage.conversation = conversation
         
         /// prepare message history for Ollama
-        var messageHistory = conversation.messages
-            .sorted{$0.createdAt < $1.createdAt}
-            .map{OKChatRequestData.Message(role: OKChatRequestData.Message.Role(rawValue: $0.role) ?? .assistant, content: $0.content)}
+        let sortedMessages = conversation.messages.sorted { $0.createdAt < $1.createdAt }
         
+        var messageHistory = sortedMessages.enumerated().map { (index, message) in
+            let isLastMessage = (index == sortedMessages.count - 1)
+            let content = isLastMessage ? (message.prompt ?? message.content) : message.content
+            return OKChatRequestData.Message(
+                role: OKChatRequestData.Message.Role(rawValue: message.role) ?? .assistant,
+                content: content
+            )
+        }
         
         print(messageHistory.map({$0.content}))
         

@@ -39,6 +39,7 @@ final class MessageSD: Identifiable {
         return false
     }
     var content: String
+    var prompt: String?
     var realContent: String? {
         if content.contains("<think>") {
             if content.contains("</think>") {
@@ -60,8 +61,9 @@ final class MessageSD: Identifiable {
     @Relationship var conversation: ConversationSD?
         
     
-    init(content: String, role: String, done: Bool = false, error: Bool = false, image: Data? = nil) {
+    init(content: String, prompt: String? = nil, role: String, done: Bool = false, error: Bool = false, image: Data? = nil) {
         self.content = content
+        self.prompt = prompt ?? content
         self.role = role
         self.done = done
         self.error = error
