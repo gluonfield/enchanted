@@ -64,4 +64,14 @@ final class LanguageModelStore {
         }
         try await swiftDataService.deleteModels()
     }
+    
+    func getEmbedding(model: LanguageModelSD, prompt: String) async -> [Double]? {
+        switch model.modelProvider {
+        case .ollama:
+            let embeddings = await OllamaService.shared.getEmbedding(prompt: prompt, model: model)
+            return embeddings
+        case .none:
+            return nil
+        }
+    }
 }

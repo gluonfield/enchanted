@@ -21,7 +21,9 @@ final actor SwiftDataService: ModelActor {
                 LanguageModelSD.self,
                 ConversationSD.self,
                 MessageSD.self,
-                CompletionInstructionSD.self
+                CompletionInstructionSD.self,
+                DatabaseSD.self,
+                DocumentSD.self
             ])
             let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
             
@@ -151,6 +153,44 @@ extension SwiftDataService {
     
     func deleteCompletionInstruction(_ instruction: CompletionInstructionSD) throws {
         self.modelContext.delete(instruction)
+        try modelContext.saveChanges()
+    }
+}
+
+// MARK: - Database
+extension SwiftDataService {
+    func createDatabase(name: String, indexPath: String, languageModelName: String) throws {
+        let db = DatabaseSD(name: name, indexPath: indexPath)
+        guard let llm = try? fetchModels().filter({$0.name == languageModelName}).first else { return }
+        db.model = llm
+        self.modelContext.insert(db)
+        try modelContext.saveChanges()
+    }
+
+    func deleteDatabase(selectedDatabase: DatabaseSD) throws {
+        self.modelContext.delete(selectedDatabase)
+        try modelContext.saveChanges()
+    }
+
+    func getDatabases() throws -> [DatabaseSD] {
+        let sortDescriptor = SortDescriptor(\DatabaseSD.updatedAt, order: .reverse)
+        let fetchDescriptor = FetchDescriptor<DatabaseSD>(sortBy: [sortDescriptor])
+        return try modelContext.fetch(fetchDescriptor)
+    }
+
+    func databaseAttachDocuments(db: DatabaseSD, paths: [URL]) throws {
+        let docs = paths.map({DocumentSD(documentUrl: $0, status: .notStarted)})
+        db.documents = docs
+        db.updatedAt = .now
+        try modelContext.saveChanges()
+    }
+}
+
+// MARK: - Documents
+extension SwiftDataService {
+    func updateDocumentStatus(document: DocumentSD, status: DocumentIndexStatus) throws {
+        document.status = status
+        document.updatedAt = .now
         try modelContext.saveChanges()
     }
 }
