@@ -63,12 +63,12 @@ struct UseDocumentView: View {
                                 UseDocumentViewItem(database: _database, selectedDatabase: retrievalStore.selectedDatabase, selectDatabase: selectDatabase)
                             }
                         }
-#if os(macOS) || os(visionOS)
-                        .frame(maxHeight: 350)
-#elseif os(iOS)
-                        .frame(maxHeight: .infinity)
-#endif
                     }
+#if os(macOS) || os(visionOS)
+                    .frame(maxHeight: 350)
+#elseif os(iOS)
+                    .frame(maxHeight: .infinity)
+#endif
                 }
 
                 Divider()
