@@ -15,6 +15,7 @@ struct Chat: View, Sendable {
     @AppStorage("appUserInitials") private var userInitials: String = ""
     @AppStorage("defaultOllamaModel") private var defaultOllamaModel: String = ""
     @State var showMenu = false
+    private var messageEmbedding = MessageEmbedding()
     
     init(languageModelStore: LanguageModelStore, conversationStore: ConversationStore, appStore: AppStore) {
         _languageModelStore = State(initialValue: languageModelStore)

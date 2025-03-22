@@ -24,8 +24,7 @@ struct DatabaseListView: View {
                 ForEach(databases, id:\.self) { database in
                     Text("\(database.name) (\(database.model?.name ?? "Unknown"))").tag(Optional(database))
                 }
-            }
-            label: {
+            } label: {
 #if os(macOS) || os(visionOS)
                 Text("Database:")
                     .font(.system(size: 14))

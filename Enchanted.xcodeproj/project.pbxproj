@@ -31,6 +31,8 @@
 		1792B0352D8F4D9200D66667 /* TextMessageInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0342D8F4D9200D66667 /* TextMessageInput.swift */; };
 		1792B0372D8F4D9200D66667 /* DatabaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0362D8F4D9200D66667 /* DatabaseView.swift */; };
 		1792B0392D8F4D9200D66667 /* MessageEmbedding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0382D8F4D9200D66667 /* MessageEmbedding.swift */; };
+		1792B03C2D8F4D9200D66667 /* UseDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B03B2D8F4D9200D66667 /* UseDocumentView.swift */; };
+		1792B03E2D8F4D9200D66667 /* UseDocumentViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B03D2D8F4D9200D66667 /* UseDocumentViewItem.swift */; };
 		3396E0762BD877D500213816 /* Menus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3396E0752BD877D500213816 /* Menus.swift */; };
 		FF0146CB2B3DA1DF00A2A9F6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0146CA2B3DA1DF00A2A9F6 /* Settings.swift */; };
 		FF0146CD2B3DADCA00A2A9F6 /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0146CC2B3DADCA00A2A9F6 /* HapticsService.swift */; };
@@ -153,6 +155,8 @@
 		1792B0342D8F4D9200D66667 /* TextMessageInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageInput.swift; sourceTree = "<group>"; };
 		1792B0362D8F4D9200D66667 /* DatabaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseView.swift; sourceTree = "<group>"; };
 		1792B0382D8F4D9200D66667 /* MessageEmbedding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEmbedding.swift; sourceTree = "<group>"; };
+		1792B03B2D8F4D9200D66667 /* UseDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseDocumentView.swift; sourceTree = "<group>"; };
+		1792B03D2D8F4D9200D66667 /* UseDocumentViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseDocumentViewItem.swift; sourceTree = "<group>"; };
 		3396E0752BD877D500213816 /* Menus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menus.swift; sourceTree = "<group>"; };
 		FF0146CA2B3DA1DF00A2A9F6 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		FF0146CC2B3DADCA00A2A9F6 /* HapticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsService.swift; sourceTree = "<group>"; };
@@ -336,9 +340,19 @@
 			path = RetrievalHeader;
 			sourceTree = "<group>";
 		};
+		1792B03A2D8F4D9200D66667 /* UseDocument */ = {
+			isa = PBXGroup;
+			children = (
+				1792B03D2D8F4D9200D66667 /* UseDocumentViewItem.swift */,
+				1792B03B2D8F4D9200D66667 /* UseDocumentView.swift */,
+			);
+			path = UseDocument;
+			sourceTree = "<group>";
+		};
 		FF10022C2B2481790011A4DC /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1792B03A2D8F4D9200D66667 /* UseDocument */,
 				1792B0342D8F4D9200D66667 /* TextMessageInput.swift */,
 				1792B0322D8F4D9200D66667 /* AudioMessageInput.swift */,
 				FF10025F2B26499B0011A4DC /* ConversationStatusView.swift */,
@@ -840,6 +854,7 @@
 				FF1002392B24BBF20011A4DC /* Chat.swift in Sources */,
 				FFB0327D2B312F3D0066A9DB /* RecordingView.swift in Sources */,
 				FFBB2C7D2C047B6C00509204 /* Image+Extension.swift in Sources */,
+				1792B03E2D8F4D9200D66667 /* UseDocumentViewItem.swift in Sources */,
 				FF6D82192B912804001183A8 /* CompletionButtonView.swift in Sources */,
 				FF10024A2B25BE740011A4DC /* LanguageModelSD.swift in Sources */,
 				FF6B7B132B3EE7AC00E8FEA3 /* Throttler.swift in Sources */,
@@ -865,6 +880,7 @@
 				FF5FA0D62B35169400BC471D /* Binding+Extension.swift in Sources */,
 				FFE21C782B82353A00A69B9C /* SleepTest.swift in Sources */,
 				FF1002502B25C79F0011A4DC /* SwiftDataService.swift in Sources */,
+				1792B03C2D8F4D9200D66667 /* UseDocumentView.swift in Sources */,
 				FF7FBE4C2B78E384000901F7 /* SamplePrompt.swift in Sources */,
 				FF38F8582B7AB1AD00546B56 /* PanelManager.swift in Sources */,
 				FF6D82172B9122F9001183A8 /* CompletionInstructionSD.swift in Sources */,

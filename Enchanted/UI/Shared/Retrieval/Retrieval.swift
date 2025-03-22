@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SVDB
 
 struct Retrieval: View {
     @State private var retrievalStore = RetrievalStore.shared
     @State private var languageModelStore = LanguageModelStore.shared
+    @State private var svdb = SVDB.shared
 
     @State private var indexFilesProgress: Double = 0
     @State private var indexing: Bool = false
@@ -33,6 +35,8 @@ struct Retrieval: View {
         Task {
             try? await retrievalStore.deleteDatabase(selectedDatabase: selectedDatabase)
             retrievalStore.selectDatabase(database: nil, overWrite: true)
+            
+            svdb.releaseCollection(selectedDatabase.id.uuidString)
         }
     }
 

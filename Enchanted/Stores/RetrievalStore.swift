@@ -50,7 +50,6 @@ final class RetrievalStore {
     func deleteDatabase(selectedDatabase: DatabaseSD) async throws {
         try await swiftDataService.deleteDatabase(selectedDatabase: selectedDatabase)
         try await fetchDatabases()
-        svdb.releaseCollection(selectedDatabase.id.uuidString)
     }
 
     func fetchDatabases() async throws {

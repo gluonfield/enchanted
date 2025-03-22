@@ -33,6 +33,10 @@ struct RetrievalView: View {
             } else {
                 DatabaseListView(selectedDatabase: $selectedDatabase, databases: databases, documents: documents, indexFilesProgress: $indexFilesProgress, indexing: $indexing, deleteDatabase: deleteDatabase, indexFiles: indexFiles, attachFiles: attachFiles)
             }
+            
+#if os(iOS)
+            Spacer()
+#endif
         }
 #if os(macOS) || os(visionOS)
         .frame(minWidth: 700, maxWidth: 800, minHeight: 500)
