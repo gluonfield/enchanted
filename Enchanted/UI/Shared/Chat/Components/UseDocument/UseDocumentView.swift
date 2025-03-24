@@ -43,7 +43,7 @@ struct UseDocumentView: View {
                             .foregroundColor(.gray)
                             .padding(.bottom, 6)
 
-                        Text("Add Document")
+                        Text("Add Database")
                             .foregroundStyle(Color.blue)
                             .onTapGesture {
                                 showRetrievalTap()
