@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import Observation
-import SVDB
 
 @Observable
 final class RetrievalStore {
@@ -16,29 +15,28 @@ final class RetrievalStore {
     static let shared = RetrievalStore()
 
     private let swiftDataService: SwiftDataService
+    private let svdbService: SVDBService
     private let splitter: SimpleTextSplitter
     private let dataLoader: DataLoader
     private let languageModelStore: LanguageModelStore
-    private var collection: Collection?
 
     var databases: [DatabaseSD] = []
-    var svdb: SVDB
     var selectedDatabase: DatabaseSD?
     var progress: Double?
 
     // MARK: - Initialization
     private init(
         swiftDataService: SwiftDataService = .shared,
+        svdbService: SVDBService = .shared,
         splitter: SimpleTextSplitter = .init(),
         dataLoader: DataLoader = .init(),
-        languageModelStore: LanguageModelStore = .shared,
-        svdb: SVDB = .shared
+        languageModelStore: LanguageModelStore = .shared
     ) {
         self.swiftDataService = swiftDataService
+        self.svdbService = svdbService
         self.splitter = splitter
         self.dataLoader = dataLoader
         self.languageModelStore = languageModelStore
-        self.svdb = svdb
     }
 
     // MARK: - Public Methods
@@ -148,12 +146,15 @@ final class RetrievalStore {
         databaseId: UUID
     ) async throws {
 
+        
         for (chunkIndex, chunk) in chunks.enumerated() {
             guard let embedding = await languageModelStore.getEmbedding(model: languageModel, prompt: chunk) else {
                 continue
             }
 
-            await storeSVDB(chunk: chunk, embedding: embedding, databaseId: databaseId)
+            // add document in selected collection of SVDB
+            try await svdbService.addDocument(text: chunk, embedding: embedding)
+
             let chunkProgress = Double(chunkIndex + 1) / Double(chunks.count)
             let overallProgress = documentsProgress + (chunkProgress / Double(chunks.count))
 
@@ -168,65 +169,6 @@ final class RetrievalStore {
     private func markDocumentFailed(_ document: DocumentSD) async throws {
         try await swiftDataService.updateDocumentStatus(document: document, status: .failed)
     }
-
-
-    func storeSVDB(chunk: String, embedding: [Double], databaseId: UUID) async {
-        do {
-            collection = try svdb.collection("\(databaseId)")
-            guard let collection = collection else {
-                print("Failed to get or create collection")
-                return
-            }
-
-            collection.addDocument(text: chunk, embedding: embedding)
-//            try collection.load()
-        } catch let error as SVDBError {
-            if(error == .collectionAlreadyExists) {
-                guard let collection = collection else {
-                    print("Failed to get or create collection")
-                    return
-                }
-                collection.addDocument(text: chunk, embedding: embedding)
-            }
-        }  catch {
-            print("Failed to add entry:", error)
-        }
-    }
-
-    func searchSVDB(promptEmbedding: [Double]) -> String {
-        guard let databaseId = selectedDatabase?.id else {
-            print("Database ID not found.")
-            return ""
-        }
-
-        do {
-            let collection = try svdb.collection(databaseId.uuidString)
-            return searchInCollection(collection, with: promptEmbedding)
-        } catch let error as SVDBError {
-            if(error == .collectionAlreadyExists) {
-                guard let collection = collection else {
-                    print("Collection unavailable.")
-                    return ""
-                }
-                return searchInCollection(collection, with: promptEmbedding)
-            }
-        } catch {
-            print("Failed to load or search collection:", error)
-        }
-        return ""
-    }
-
-    // Helper function to perform the search in a collection
-    private func searchInCollection(_ collection: Collection, with promptEmbedding: [Double]) -> String {
-        if let firstResult = collection.search(query: promptEmbedding, num_results: 1).first {
-            print("Result found: \(firstResult.text)")
-            return firstResult.text
-        } else {
-            print("No result found.")
-            return ""
-        }
-    }
-
 }
 
 // MARK: - Custom Errors

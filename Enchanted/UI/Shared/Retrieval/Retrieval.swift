@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import SVDB
 
 struct Retrieval: View {
     @State private var retrievalStore = RetrievalStore.shared
     @State private var languageModelStore = LanguageModelStore.shared
-    @State private var svdb = SVDB.shared
+    private var svdbService = SVDBService.shared
 
     @State private var indexFilesProgress: Double = 0
     @State private var indexing: Bool = false
@@ -36,7 +35,8 @@ struct Retrieval: View {
             try? await retrievalStore.deleteDatabase(selectedDatabase: selectedDatabase)
             retrievalStore.selectDatabase(database: nil, overWrite: true)
             
-            svdb.releaseCollection(selectedDatabase.id.uuidString)
+            // delete Collection of SVDB
+            try await svdbService.releaseCollection(selectedDatabase.id.uuidString)
         }
     }
 
@@ -75,6 +75,9 @@ struct Retrieval: View {
         Task {
             do {
                 indexing.toggle()
+                // create vector database collection
+                try await svdbService.createCollection(databaseId: databaseId)
+                
                 try await retrievalStore.indexDocuments(databaseId: databaseId) { progress in
                     withAnimation {
                         self.indexFilesProgress = progress

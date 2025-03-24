@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SVDB
 
 protocol MessageEmbeddingProtocol {
     func generateContext(_ prompt: String, _ model: LanguageModelSD) async -> String
@@ -15,13 +14,16 @@ protocol MessageEmbeddingProtocol {
 struct MessageEmbedding: MessageEmbeddingProtocol {
     private let languageModelStore: LanguageModelStore
     private let retrievalStore: RetrievalStore
+    private let svdbService: SVDBService
 
     init(
         languageModelStore: LanguageModelStore = .shared,
-        retrievalStore: RetrievalStore = .shared
+        retrievalStore: RetrievalStore = .shared,
+        svdbService: SVDBService = .shared
     ) {
         self.languageModelStore = languageModelStore
         self.retrievalStore = retrievalStore
+        self.svdbService = svdbService
     }
 
     func generateContext(_ prompt: String, _ model: LanguageModelSD) async -> String {
@@ -33,8 +35,13 @@ struct MessageEmbedding: MessageEmbeddingProtocol {
 
         print("[MessageEmbedding] Embedding vector generated: \(promptEmbedding)")
 
+        guard let databaseId = retrievalStore.selectedDatabase?.id else {
+            print("Database ID not found.")
+            return ""
+        }
+        
         // Perform similarity search to retrieve relevant context
-        let retrievedContext = retrievalStore.searchSVDB(promptEmbedding: promptEmbedding)
+        let retrievedContext = await svdbService.search(query: promptEmbedding, databaseId: databaseId)
 
         return retrievedContext
     }

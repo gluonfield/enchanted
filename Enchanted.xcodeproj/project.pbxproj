@@ -13,6 +13,7 @@
 		1792B0072D8F4D9200D66667 /* TextSplitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0062D8F4D9200D66667 /* TextSplitter.swift */; };
 		1792B0092D8F4D9200D66667 /* DatabaseSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0082D8F4D9200D66667 /* DatabaseSD.swift */; };
 		1792B00B2D8F4D9200D66667 /* DocumentSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B00A2D8F4D9200D66667 /* DocumentSD.swift */; };
+        1792B00D2D8F4D9200D66667 /* RetrievalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B00C2D8F4D9200D66667 /* RetrievalStore.swift */; };
 		1792B00D2D8F4D9200D66667 /* RetrievalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B00C2D8F4D9200D66667 /* RetrievalStore.swift */; };
 		1792B0102D8F4D9200D66667 /* SVDB in Frameworks */ = {isa = PBXBuildFile; productRef = 1792B00F2D8F4D9200D66667 /* SVDB */; };
 		1792B0122D8F4D9200D66667 /* CircularProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0112D8F4D9200D66667 /* CircularProgressIndicator.swift */; };
@@ -34,6 +35,7 @@
 		1792B03C2D8F4D9200D66667 /* UseDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B03B2D8F4D9200D66667 /* UseDocumentView.swift */; };
 		1792B03E2D8F4D9200D66667 /* UseDocumentViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B03D2D8F4D9200D66667 /* UseDocumentViewItem.swift */; };
 		3396E0762BD877D500213816 /* Menus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3396E0752BD877D500213816 /* Menus.swift */; };
+		F8924F172D918BE500552A63 /* SVDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8924F162D918BE100552A63 /* SVDBService.swift */; };
 		FF0146CB2B3DA1DF00A2A9F6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0146CA2B3DA1DF00A2A9F6 /* Settings.swift */; };
 		FF0146CD2B3DADCA00A2A9F6 /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0146CC2B3DADCA00A2A9F6 /* HapticsService.swift */; };
 		FF0611EA2C04A11800443B33 /* Magnet in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = FF0611E92C04A11800443B33 /* Magnet */; };
@@ -158,6 +160,7 @@
 		1792B03B2D8F4D9200D66667 /* UseDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseDocumentView.swift; sourceTree = "<group>"; };
 		1792B03D2D8F4D9200D66667 /* UseDocumentViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseDocumentViewItem.swift; sourceTree = "<group>"; };
 		3396E0752BD877D500213816 /* Menus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menus.swift; sourceTree = "<group>"; };
+		F8924F162D918BE100552A63 /* SVDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVDBService.swift; sourceTree = "<group>"; };
 		FF0146CA2B3DA1DF00A2A9F6 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		FF0146CC2B3DADCA00A2A9F6 /* HapticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsService.swift; sourceTree = "<group>"; };
 		FF0611F22C04BEFD00443B33 /* AVSpeechSynthesisVoice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesisVoice+Extension.swift"; sourceTree = "<group>"; };
@@ -660,6 +663,7 @@
 		FFEC32A42B247874003E5C04 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F8924F162D918BE100552A63 /* SVDBService.swift */,
 				FF2F03412B795E0B00349855 /* Clipboard.swift */,
 				FF0146CC2B3DADCA00A2A9F6 /* HapticsService.swift */,
 				FF2F03482B796A6500349855 /* HotkeyService.swift */,
@@ -890,6 +894,7 @@
 				FF10026D2B2751760011A4DC /* SettingsView.swift in Sources */,
 				FF33066C2B83BB31007B33E5 /* SidebarButton.swift in Sources */,
 				FFD57E322BF291B2003FEFF1 /* CodeBlockView.swift in Sources */,
+				F8924F172D918BE500552A63 /* SVDBService.swift in Sources */,
 				FF1002542B261D460011A4DC /* MessageListVIew.swift in Sources */,
 				FF10024E2B25C2A70011A4DC /* ConversationSD.swift in Sources */,
 				FF9C920C2BF0C088004C8275 /* OptionsMenuView.swift in Sources */,
