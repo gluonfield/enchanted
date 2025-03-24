@@ -58,7 +58,7 @@ struct InputFieldsView: View {
 #if os(macOS)
                 TextMessageInput(message: $message, fileDropActive: $fileDropActive, sendMessage: sendMessage, isFocusedInput: $isFocusedInput, selectedImage: $selectedImage)
 #elseif os(visionOS)
-                TextMessageInput(message: $message, sendMessage: sendMessage, fileDropActive: $fileDropActive, isFocusedInput: $isFocusedInput)
+                TextMessageInput(message: $message, fileDropActive: $fileDropActive, sendMessage: sendMessage, isFocusedInput: $isFocusedInput)
 #endif
                 HStack {
                     UseDocumentView(documentUsage: $documentUsage)
