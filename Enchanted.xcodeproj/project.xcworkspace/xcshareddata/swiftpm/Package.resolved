@@ -1,5 +1,5 @@
 {
-  "originHash" : "3fe20c6c704d04e2f924250b1ce019f513915d235cdd9aedc57f51a0a1a94763",
+  "originHash" : "becdcce131f7b9e81f348ddb40d78e5a6bd70e0e26e6ff3791cab9161291a68f",
   "pins" : [
     {
       "identity" : "activityindicatorview",
@@ -74,6 +74,15 @@
       }
     },
     {
+      "identity" : "svdb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Dripfarm/SVDB",
+      "state" : {
+        "revision" : "01e78b8bb9423e40201db450180f731c9a67c554",
+        "version" : "2.0.0"
+      }
+    },
+    {
       "identity" : "swift-async-algorithms",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-async-algorithms.git",
@@ -96,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",
       "state" : {
-        "revision" : "94cf62b3ba8d4bed62680a282d4c25f9c63c2efb",
-        "version" : "1.1.0"
+        "revision" : "671108c96644956dddcd89dd59c203dcdb36cec7",
+        "version" : "1.1.4"
       }
     },
     {

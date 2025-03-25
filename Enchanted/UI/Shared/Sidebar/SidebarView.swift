@@ -15,6 +15,7 @@ struct SidebarView: View {
     var onConversationDelete: (_ conversation: ConversationSD) -> ()
     var onDeleteDailyConversations: (_ date: Date) -> ()
     @State var showSettings = false
+    @State var showRetrieval = false
     @State var showCompletions = false
     @State var showKeyboardShortcutas = false
     
@@ -25,6 +26,10 @@ struct SidebarView: View {
         }
     }
     
+    private func showRetrievalTap() {
+        showRetrieval.toggle()
+    }
+
     var body: some View {
         VStack {
             ScrollView() {
@@ -46,6 +51,8 @@ struct SidebarView: View {
             SidebarButton(title: "Shortcuts", image: "keyboard.fill", onClick: {showKeyboardShortcutas.toggle()})
 #endif
             
+            SidebarButton(title: "Retrieval", image: "tray.fill", onClick: showRetrievalTap)
+            
             SidebarButton(title: "Settings", image: "gearshape.fill", onClick: onSettingsTap)
             
         }
@@ -55,6 +62,9 @@ struct SidebarView: View {
 #endif
         .sheet(isPresented: $showSettings) {
             Settings()
+        }
+        .sheet(isPresented: $showRetrieval) {
+            Retrieval()
         }
 #if os(macOS)
         .sheet(isPresented: $showCompletions) {

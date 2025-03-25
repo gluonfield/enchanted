@@ -15,7 +15,7 @@ struct ChatView: View {
     var modelsList: [LanguageModelSD]
     var onMenuTap: () -> ()
     var onNewConversationTap: () -> ()
-    var onSendMessageTap: @MainActor (_ prompt: String, _ model: LanguageModelSD, _ image: Image?, _ trimmingMessageId: String?) -> ()
+    var onSendMessageTap: @MainActor (_ prompt: String, _ model: LanguageModelSD, _ image: Image?, _ trimmingMessageId: String?, _ documentUsage: Bool?) -> ()
     var conversationState: ConversationState
     var onStopGenerateTap: @MainActor () -> ()
     var reachable: Bool
@@ -32,6 +32,7 @@ struct ChatView: View {
     /// Image selection
     @State private var pickerSelectorActive: PhotosPickerItem?
     @State private var selectedImage: Image?
+    @State private var documentUsage: Bool = false
     
     init(
         conversation: ConversationSD? = nil,
@@ -41,7 +42,7 @@ struct ChatView: View {
         onSelectModel: @MainActor @escaping (_ model: LanguageModelSD?) -> (),
         onMenuTap: @escaping () -> Void,
         onNewConversationTap: @escaping () -> Void,
-        onSendMessageTap: @MainActor @escaping (_ prompt: String, _ model: LanguageModelSD, _ image: Image?, _ trimmingMessageId: String?) -> Void,
+        onSendMessageTap: @MainActor @escaping (_ prompt: String, _ model: LanguageModelSD, _ image: Image?, _ trimmingMessageId: String?, _ documentUsage: Bool?) -> Void,
         conversationState: ConversationState,
         onStopGenerateTap: @MainActor @escaping () -> Void,
         reachable: Bool,
@@ -72,7 +73,8 @@ struct ChatView: View {
                 message,
                 selectedModel,
                 selectedImage,
-                editMessage?.id.uuidString
+                editMessage?.id.uuidString,
+                documentUsage
             )
             
             withAnimation {
@@ -146,6 +148,8 @@ struct ChatView: View {
                     .frame(minHeight: 40)
                     .font(.system(size: 14))
                 
+                UseDocumentView(documentUsage: $documentUsage)
+                
                 RecordingView(speechRecognizer: speechRecognizer, isRecording: $isRecording.animation()) { transcription in
                     self.message = transcription
                 }
@@ -195,7 +199,7 @@ struct ChatView: View {
             } else {
                 EmptyConversaitonView(sendPrompt: {selectedMessage in
                     if let selectedModel = selectedModel {
-                        onSendMessageTap(selectedMessage, selectedModel, nil, nil)
+                        onSendMessageTap(selectedMessage, selectedModel, nil, nil, false)
                     }
                 })
             }
@@ -230,7 +234,7 @@ struct ChatView: View {
         onSelectModel: {_ in },
         onMenuTap: {},
         onNewConversationTap: { },
-        onSendMessageTap: {_,_,_,_    in},
+        onSendMessageTap: {_,_,_,_,_    in},
         conversationState: .loading,
         onStopGenerateTap: {},
         reachable: false,
@@ -248,7 +252,7 @@ struct ChatView: View {
         onSelectModel: {_ in},
         onMenuTap: {},
         onNewConversationTap: { },
-        onSendMessageTap: {_,_,_,_    in},
+        onSendMessageTap: {_,_,_,_,_    in},
         conversationState: .completed,
         onStopGenerateTap: {},
         reachable: true,

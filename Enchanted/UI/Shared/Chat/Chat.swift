@@ -15,6 +15,7 @@ struct Chat: View, Sendable {
     @AppStorage("appUserInitials") private var userInitials: String = ""
     @AppStorage("defaultOllamaModel") private var defaultOllamaModel: String = ""
     @State var showMenu = false
+    private var messageEmbedding = MessageEmbedding()
     
     init(languageModelStore: LanguageModelStore, conversationStore: ConversationStore, appStore: AppStore) {
         _languageModelStore = State(initialValue: languageModelStore)
@@ -43,14 +44,26 @@ struct Chat: View, Sendable {
     }
     
     @MainActor
-    func sendMessage(prompt: String, model: LanguageModelSD, image: Image?, trimmingMessageId: String?) {
-        conversationStore.sendPrompt(
-            userPrompt: prompt,
-            model: model,
-            image: image,
-            systemPrompt: systemPrompt,
-            trimmingMessageId: trimmingMessageId
-        )
+    func sendMessage(prompt: String, model: LanguageModelSD, image: Image?, trimmingMessageId: String?, documentUsage: Bool?) {
+        Task {
+            var embeddedPrompt = ""
+            guard let documentUsage = documentUsage else {
+                return
+            }
+            
+            if (documentUsage) {
+                embeddedPrompt = await messageEmbedding.generateContext(prompt, model)
+            }
+            
+            conversationStore.sendPrompt(
+                userPrompt: prompt,
+                embeddedPrompt: embeddedPrompt,
+                model: model,
+                image: image,
+                systemPrompt: systemPrompt,
+                trimmingMessageId: trimmingMessageId
+            )
+        }
     }
     
     func onConversationTap(_ conversation: ConversationSD) {

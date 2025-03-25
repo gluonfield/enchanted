@@ -16,7 +16,7 @@ struct ChatView: View {
     var modelsList: [LanguageModelSD]
     var onMenuTap: () -> ()
     var onNewConversationTap: () -> ()
-    var onSendMessageTap: @MainActor (_ prompt: String, _ model: LanguageModelSD, _ image: Image?, _ trimmingMessageId: String?) -> ()
+    var onSendMessageTap: @MainActor (_ prompt: String, _ model: LanguageModelSD, _ image: Image?, _ trimmingMessageId: String?, _ documentUsage: Bool?) -> ()
     var onConversationTap: (_ conversation: ConversationSD) -> ()
     var conversationState: ConversationState
     var onStopGenerateTap: @MainActor () -> ()
@@ -71,7 +71,7 @@ struct ChatView: View {
                 } else {
                     EmptyConversaitonView(sendPrompt: {selectedMessage in
                         if let selectedModel = selectedModel {
-                            onSendMessageTap(selectedMessage, selectedModel, nil, nil)
+                            onSendMessageTap(selectedMessage, selectedModel, nil, nil, false)
                         }
                     })
                 }
@@ -142,7 +142,7 @@ struct ChatView: View {
         modelsList: LanguageModelSD.sample,
         onMenuTap: {},
         onNewConversationTap: { },
-        onSendMessageTap: {_,_,_,_    in},
+        onSendMessageTap: {_,_,_,_,_    in},
         onConversationTap: {_ in},
         conversationState: .completed,
         onStopGenerateTap: {},

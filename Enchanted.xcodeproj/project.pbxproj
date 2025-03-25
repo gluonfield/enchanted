@@ -7,7 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1792B0002D8F4D9200D66667 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792AFFF2D8F4D9200D66667 /* URL+Extension.swift */; };
+		1792B0022D8F4D9200D66667 /* DocumentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0012D8F4D9200D66667 /* DocumentStatus.swift */; };
+		1792B0052D8F4D9200D66667 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0042D8F4D9200D66667 /* DataLoader.swift */; };
+		1792B0072D8F4D9200D66667 /* TextSplitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0062D8F4D9200D66667 /* TextSplitter.swift */; };
+		1792B0092D8F4D9200D66667 /* DatabaseSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0082D8F4D9200D66667 /* DatabaseSD.swift */; };
+		1792B00B2D8F4D9200D66667 /* DocumentSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B00A2D8F4D9200D66667 /* DocumentSD.swift */; };
+        1792B00D2D8F4D9200D66667 /* RetrievalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B00C2D8F4D9200D66667 /* RetrievalStore.swift */; };
+		1792B00D2D8F4D9200D66667 /* RetrievalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B00C2D8F4D9200D66667 /* RetrievalStore.swift */; };
+		1792B0102D8F4D9200D66667 /* SVDB in Frameworks */ = {isa = PBXBuildFile; productRef = 1792B00F2D8F4D9200D66667 /* SVDB */; };
+		1792B0122D8F4D9200D66667 /* CircularProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0112D8F4D9200D66667 /* CircularProgressIndicator.swift */; };
+		1792B0182D8F4D9200D66667 /* DatabaseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0172D8F4D9200D66667 /* DatabaseListView.swift */; };
+		1792B01B2D8F4D9200D66667 /* DeleteDatabaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B01A2D8F4D9200D66667 /* DeleteDatabaseButton.swift */; };
+		1792B01D2D8F4D9200D66667 /* ImportFilesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B01C2D8F4D9200D66667 /* ImportFilesButton.swift */; };
+		1792B01F2D8F4D9200D66667 /* IndexingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B01E2D8F4D9200D66667 /* IndexingStatusView.swift */; };
+		1792B0222D8F4D9200D66667 /* DatabaseEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0212D8F4D9200D66667 /* DatabaseEmptyView.swift */; };
+		1792B0242D8F4D9200D66667 /* RetrievalGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0232D8F4D9200D66667 /* RetrievalGuide.swift */; };
+		1792B0262D8F4D9200D66667 /* RetrievalGuideItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0252D8F4D9200D66667 /* RetrievalGuideItem.swift */; };
+		1792B02B2D8F4D9200D66667 /* NewDatabaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B02A2D8F4D9200D66667 /* NewDatabaseButton.swift */; };
+		1792B02D2D8F4D9200D66667 /* RetrievalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B02C2D8F4D9200D66667 /* RetrievalHeaderView.swift */; };
+		1792B02F2D8F4D9200D66667 /* RetrievalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B02E2D8F4D9200D66667 /* RetrievalView.swift */; };
+		1792B0312D8F4D9200D66667 /* Retrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0302D8F4D9200D66667 /* Retrieval.swift */; };
+		1792B0332D8F4D9200D66667 /* AudioMessageInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0322D8F4D9200D66667 /* AudioMessageInput.swift */; };
+		1792B0352D8F4D9200D66667 /* TextMessageInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0342D8F4D9200D66667 /* TextMessageInput.swift */; };
+		1792B0372D8F4D9200D66667 /* DatabaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0362D8F4D9200D66667 /* DatabaseView.swift */; };
+		1792B0392D8F4D9200D66667 /* MessageEmbedding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B0382D8F4D9200D66667 /* MessageEmbedding.swift */; };
+		1792B03C2D8F4D9200D66667 /* UseDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B03B2D8F4D9200D66667 /* UseDocumentView.swift */; };
+		1792B03E2D8F4D9200D66667 /* UseDocumentViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792B03D2D8F4D9200D66667 /* UseDocumentViewItem.swift */; };
 		3396E0762BD877D500213816 /* Menus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3396E0752BD877D500213816 /* Menus.swift */; };
+		F8924F172D918BE500552A63 /* SVDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8924F162D918BE100552A63 /* SVDBService.swift */; };
 		FF0146CB2B3DA1DF00A2A9F6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0146CA2B3DA1DF00A2A9F6 /* Settings.swift */; };
 		FF0146CD2B3DADCA00A2A9F6 /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0146CC2B3DADCA00A2A9F6 /* HapticsService.swift */; };
 		FF0611EA2C04A11800443B33 /* Magnet in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = FF0611E92C04A11800443B33 /* Magnet */; };
@@ -106,7 +134,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1792AFFF2D8F4D9200D66667 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
+		1792B0012D8F4D9200D66667 /* DocumentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentStatus.swift; sourceTree = "<group>"; };
+		1792B0042D8F4D9200D66667 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
+		1792B0062D8F4D9200D66667 /* TextSplitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSplitter.swift; sourceTree = "<group>"; };
+		1792B0082D8F4D9200D66667 /* DatabaseSD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSD.swift; sourceTree = "<group>"; };
+		1792B00A2D8F4D9200D66667 /* DocumentSD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSD.swift; sourceTree = "<group>"; };
+		1792B00C2D8F4D9200D66667 /* RetrievalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievalStore.swift; sourceTree = "<group>"; };
+		1792B0112D8F4D9200D66667 /* CircularProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressIndicator.swift; sourceTree = "<group>"; };
+		1792B0172D8F4D9200D66667 /* DatabaseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseListView.swift; sourceTree = "<group>"; };
+		1792B01A2D8F4D9200D66667 /* DeleteDatabaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDatabaseButton.swift; sourceTree = "<group>"; };
+		1792B01C2D8F4D9200D66667 /* ImportFilesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFilesButton.swift; sourceTree = "<group>"; };
+		1792B01E2D8F4D9200D66667 /* IndexingStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexingStatusView.swift; sourceTree = "<group>"; };
+		1792B0212D8F4D9200D66667 /* DatabaseEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseEmptyView.swift; sourceTree = "<group>"; };
+		1792B0232D8F4D9200D66667 /* RetrievalGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievalGuide.swift; sourceTree = "<group>"; };
+		1792B0252D8F4D9200D66667 /* RetrievalGuideItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievalGuideItem.swift; sourceTree = "<group>"; };
+		1792B02A2D8F4D9200D66667 /* NewDatabaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDatabaseButton.swift; sourceTree = "<group>"; };
+		1792B02C2D8F4D9200D66667 /* RetrievalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievalHeaderView.swift; sourceTree = "<group>"; };
+		1792B02E2D8F4D9200D66667 /* RetrievalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievalView.swift; sourceTree = "<group>"; };
+		1792B0302D8F4D9200D66667 /* Retrieval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Retrieval.swift; sourceTree = "<group>"; };
+		1792B0322D8F4D9200D66667 /* AudioMessageInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMessageInput.swift; sourceTree = "<group>"; };
+		1792B0342D8F4D9200D66667 /* TextMessageInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageInput.swift; sourceTree = "<group>"; };
+		1792B0362D8F4D9200D66667 /* DatabaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseView.swift; sourceTree = "<group>"; };
+		1792B0382D8F4D9200D66667 /* MessageEmbedding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEmbedding.swift; sourceTree = "<group>"; };
+		1792B03B2D8F4D9200D66667 /* UseDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseDocumentView.swift; sourceTree = "<group>"; };
+		1792B03D2D8F4D9200D66667 /* UseDocumentViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseDocumentViewItem.swift; sourceTree = "<group>"; };
 		3396E0752BD877D500213816 /* Menus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menus.swift; sourceTree = "<group>"; };
+		F8924F162D918BE100552A63 /* SVDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVDBService.swift; sourceTree = "<group>"; };
 		FF0146CA2B3DA1DF00A2A9F6 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		FF0146CC2B3DADCA00A2A9F6 /* HapticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsService.swift; sourceTree = "<group>"; };
 		FF0611F22C04BEFD00443B33 /* AVSpeechSynthesisVoice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesisVoice+Extension.swift"; sourceTree = "<group>"; };
@@ -209,6 +263,7 @@
 				FF0611F12C04A2FB00443B33 /* Splash in Frameworks */,
 				FF79AEB62CE72ECE00EDE10C /* MarkdownUI in Frameworks */,
 				FF0611EA2C04A11800443B33 /* Magnet in Frameworks */,
+				1792B0102D8F4D9200D66667 /* SVDB in Frameworks */,
 				FF911DF12B98F08800915E94 /* WrappingHStack in Frameworks */,
 				FF1002662B2653EE0011A4DC /* ActivityIndicatorView in Frameworks */,
 				FFFD00C92B94CB5E00392AE6 /* AsyncAlgorithms in Frameworks */,
@@ -219,9 +274,90 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1792B0032D8F4D9200D66667 /* Retrieval */ = {
+			isa = PBXGroup;
+			children = (
+				1792B0382D8F4D9200D66667 /* MessageEmbedding.swift */,
+				1792B0062D8F4D9200D66667 /* TextSplitter.swift */,
+				1792B0042D8F4D9200D66667 /* DataLoader.swift */,
+			);
+			path = Retrieval;
+			sourceTree = "<group>";
+		};
+		1792B0132D8F4D9200D66667 /* Retrieval */ = {
+			isa = PBXGroup;
+			children = (
+				1792B0302D8F4D9200D66667 /* Retrieval.swift */,
+				1792B0142D8F4D9200D66667 /* Components */,
+			);
+			path = Retrieval;
+			sourceTree = "<group>";
+		};
+		1792B0142D8F4D9200D66667 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1792B02E2D8F4D9200D66667 /* RetrievalView.swift */,
+				1792B0292D8F4D9200D66667 /* RetrievalHeader */,
+				1792B0152D8F4D9200D66667 /* DatabaseContainer */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		1792B0152D8F4D9200D66667 /* DatabaseContainer */ = {
+			isa = PBXGroup;
+			children = (
+				1792B0202D8F4D9200D66667 /* DatabaseEmpty */,
+				1792B0162D8F4D9200D66667 /* DatabaseList */,
+			);
+			path = DatabaseContainer;
+			sourceTree = "<group>";
+		};
+		1792B0162D8F4D9200D66667 /* DatabaseList */ = {
+			isa = PBXGroup;
+			children = (
+				1792B0362D8F4D9200D66667 /* DatabaseView.swift */,
+				1792B01E2D8F4D9200D66667 /* IndexingStatusView.swift */,
+				1792B01C2D8F4D9200D66667 /* ImportFilesButton.swift */,
+				1792B01A2D8F4D9200D66667 /* DeleteDatabaseButton.swift */,
+				1792B0172D8F4D9200D66667 /* DatabaseListView.swift */,
+			);
+			path = DatabaseList;
+			sourceTree = "<group>";
+		};
+		1792B0202D8F4D9200D66667 /* DatabaseEmpty */ = {
+			isa = PBXGroup;
+			children = (
+				1792B0252D8F4D9200D66667 /* RetrievalGuideItem.swift */,
+				1792B0232D8F4D9200D66667 /* RetrievalGuide.swift */,
+				1792B0212D8F4D9200D66667 /* DatabaseEmptyView.swift */,
+			);
+			path = DatabaseEmpty;
+			sourceTree = "<group>";
+		};
+		1792B0292D8F4D9200D66667 /* RetrievalHeader */ = {
+			isa = PBXGroup;
+			children = (
+				1792B02C2D8F4D9200D66667 /* RetrievalHeaderView.swift */,
+				1792B02A2D8F4D9200D66667 /* NewDatabaseButton.swift */,
+			);
+			path = RetrievalHeader;
+			sourceTree = "<group>";
+		};
+		1792B03A2D8F4D9200D66667 /* UseDocument */ = {
+			isa = PBXGroup;
+			children = (
+				1792B03D2D8F4D9200D66667 /* UseDocumentViewItem.swift */,
+				1792B03B2D8F4D9200D66667 /* UseDocumentView.swift */,
+			);
+			path = UseDocument;
+			sourceTree = "<group>";
+		};
 		FF10022C2B2481790011A4DC /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1792B03A2D8F4D9200D66667 /* UseDocument */,
+				1792B0342D8F4D9200D66667 /* TextMessageInput.swift */,
+				1792B0322D8F4D9200D66667 /* AudioMessageInput.swift */,
 				FF10025F2B26499B0011A4DC /* ConversationStatusView.swift */,
 				FF9300DB2B7823B0000859F4 /* EmptyConversaitonView.swift */,
 				FF1002532B261D460011A4DC /* MessageListVIew.swift */,
@@ -249,6 +385,7 @@
 		FF1002422B25BAC50011A4DC /* Stores */ = {
 			isa = PBXGroup;
 			children = (
+				1792B00C2D8F4D9200D66667 /* RetrievalStore.swift */,
 				FF1002742B278C170011A4DC /* AppStore.swift */,
 				FFFD00C12B92607800392AE6 /* CompletionsStore.swift */,
 				FF1002432B25BB730011A4DC /* ConversationStore.swift */,
@@ -260,6 +397,8 @@
 		FF1002482B25BE580011A4DC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1792B00A2D8F4D9200D66667 /* DocumentSD.swift */,
+				1792B0082D8F4D9200D66667 /* DatabaseSD.swift */,
 				FF6D82162B9122F9001183A8 /* CompletionInstructionSD.swift */,
 				FF10024D2B25C2A70011A4DC /* ConversationSD.swift */,
 				FF1002492B25BE740011A4DC /* LanguageModelSD.swift */,
@@ -300,6 +439,7 @@
 		FF15EF682B826BF400D4A541 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1792B0112D8F4D9200D66667 /* CircularProgressIndicator.swift */,
 				FF15EF692B826C0300D4A541 /* SimpleFloatingButton.swift */,
 			);
 			path = Components;
@@ -453,6 +593,7 @@
 		FFEC328F2B24779A003E5C04 /* Enchanted */ = {
 			isa = PBXGroup;
 			children = (
+				1792B0032D8F4D9200D66667 /* Retrieval */,
 				FF9C92072BF0B464004C8275 /* EnchantedDebug.entitlements */,
 				FFEC32982B24779B003E5C04 /* Enchanted.entitlements */,
 				FFE2C8222B9A657A00BD82F3 /* Accessibility.plist */,
@@ -490,6 +631,7 @@
 		FFEC32A22B247858003E5C04 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1792AFFF2D8F4D9200D66667 /* URL+Extension.swift */,
 				FF5FA0D52B35169400BC471D /* Binding+Extension.swift */,
 				FF2F03432B79631800349855 /* Button+Extension.swift */,
 				FF1002312B2483A20011A4DC /* Colours+Extension.swift */,
@@ -508,6 +650,7 @@
 		FFEC32A32B24786D003E5C04 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1792B0012D8F4D9200D66667 /* DocumentStatus.swift */,
 				FF1002722B276EC10011A4DC /* AppColorScheme.swift */,
 				FF10025D2B2648460011A4DC /* ConversationState.swift */,
 				FF9C92092BF0B7B1004C8275 /* LanguageModel.swift */,
@@ -520,6 +663,7 @@
 		FFEC32A42B247874003E5C04 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F8924F162D918BE100552A63 /* SVDBService.swift */,
 				FF2F03412B795E0B00349855 /* Clipboard.swift */,
 				FF0146CC2B3DADCA00A2A9F6 /* HapticsService.swift */,
 				FF2F03482B796A6500349855 /* HotkeyService.swift */,
@@ -545,6 +689,7 @@
 		FFEC32A72B247896003E5C04 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1792B0132D8F4D9200D66667 /* Retrieval */,
 				FF38F8522B7AA9C400546B56 /* ApplicationEntry.swift */,
 				FFEC32A82B24795A003E5C04 /* Chat */,
 				FF15EF682B826BF400D4A541 /* Components */,
@@ -590,6 +735,7 @@
 				FF0611E92C04A11800443B33 /* Magnet */,
 				FF0611F02C04A2FB00443B33 /* Splash */,
 				FF79AEB52CE72ECE00EDE10C /* MarkdownUI */,
+				1792B00F2D8F4D9200D66667 /* SVDB */,
 			);
 			productName = Enchanted;
 			productReference = FFEC328D2B24779A003E5C04 /* Enchanted.app */;
@@ -629,6 +775,7 @@
 				FF0611E82C04A11800443B33 /* XCRemoteSwiftPackageReference "Magnet" */,
 				FF0611EF2C04A2FB00443B33 /* XCRemoteSwiftPackageReference "Splash" */,
 				FF79AEB42CE72ECE00EDE10C /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				1792B00E2D8F4D9200D66667 /* XCRemoteSwiftPackageReference "SVDB" */,
 			);
 			productRefGroup = FFEC328E2B24779A003E5C04 /* Products */;
 			projectDirPath = "";
@@ -662,20 +809,27 @@
 				FF15EF6A2B826C0300D4A541 /* SimpleFloatingButton.swift in Sources */,
 				FF24B30E2B66BE8500AB618F /* RunningBorder.swift in Sources */,
 				FF1002602B26499B0011A4DC /* ConversationStatusView.swift in Sources */,
+				1792B0182D8F4D9200D66667 /* DatabaseListView.swift in Sources */,
 				FF10024C2B25BEA00011A4DC /* MessageSD.swift in Sources */,
 				FFCF00F12C03209A00590E79 /* SpeechService.swift in Sources */,
+				1792B00D2D8F4D9200D66667 /* RetrievalStore.swift in Sources */,
 				FF10023E2B24F4900011A4DC /* OllamaService.swift in Sources */,
+				1792B0022D8F4D9200D66667 /* DocumentStatus.swift in Sources */,
 				FFBBF48C2B35051D008D611C /* UIImage+Extension.swift in Sources */,
 				FF1002302B2482BA0011A4DC /* ChatMessageView.swift in Sources */,
 				FF1002322B2483A20011A4DC /* Colours+Extension.swift in Sources */,
 				FFB21A872B7BD0BA00D148A4 /* KeyboardReadable+Extension.swift in Sources */,
+				1792B0222D8F4D9200D66667 /* DatabaseEmptyView.swift in Sources */,
+				1792B0312D8F4D9200D66667 /* Retrieval.swift in Sources */,
 				FF1BC3C72BA0757700A58043 /* SplashSyntaxHighlighter+Extension.swift in Sources */,
 				FF33066E2B83CFEC007B33E5 /* KeyboardShortcuts.swift in Sources */,
 				FF66A51D2B76949A00FAAC1E /* Helpers.swift in Sources */,
 				FF10026A2B2731C60011A4DC /* ModelSelectorView.swift in Sources */,
+				1792B02B2D8F4D9200D66667 /* NewDatabaseButton.swift in Sources */,
 				FF38F84F2B7A7B6700546B56 /* MenuBarControlView_macOS.swift in Sources */,
 				FFB56F462C0383B80020AFFD /* VoiceView.swift in Sources */,
 				FFBBF48A2B350283008D611C /* SelectedImageView.swift in Sources */,
+				1792B02F2D8F4D9200D66667 /* RetrievalView.swift in Sources */,
 				FFEC9BDF2B8131B900AFBA63 /* HotKeys.swift in Sources */,
 				FF2F03492B796A6500349855 /* HotkeyService.swift in Sources */,
 				FF9300E02B783945000859F4 /* InputFields_macOS.swift in Sources */,
@@ -690,9 +844,13 @@
 				FF2F03442B79631800349855 /* Button+Extension.swift in Sources */,
 				FF1002682B2668790011A4DC /* Date+Extension.swift in Sources */,
 				FF6D821E2B916053001183A8 /* UpsertCompletionView.swift in Sources */,
+				1792B0392D8F4D9200D66667 /* MessageEmbedding.swift in Sources */,
+				1792B0332D8F4D9200D66667 /* AudioMessageInput.swift in Sources */,
 				FFBB2C7B2C03D8AD00509204 /* Voice.swift in Sources */,
 				FF9300D42B778829000859F4 /* ChatView_macOS.swift in Sources */,
+				1792B01D2D8F4D9200D66667 /* ImportFilesButton.swift in Sources */,
 				FF38F8512B7A919C00546B56 /* MenuBarControl_macOS.swift in Sources */,
+				1792B01F2D8F4D9200D66667 /* IndexingStatusView.swift in Sources */,
 				FF38F85A2B7AB28300546B56 /* PromptPanelView.swift in Sources */,
 				FF1002462B25BCE70011A4DC /* LanguageModelStore.swift in Sources */,
 				FFEB9CA82BA04304004B1F3D /* NotificationMessage.swift in Sources */,
@@ -700,11 +858,17 @@
 				FF1002392B24BBF20011A4DC /* Chat.swift in Sources */,
 				FFB0327D2B312F3D0066A9DB /* RecordingView.swift in Sources */,
 				FFBB2C7D2C047B6C00509204 /* Image+Extension.swift in Sources */,
+				1792B03E2D8F4D9200D66667 /* UseDocumentViewItem.swift in Sources */,
 				FF6D82192B912804001183A8 /* CompletionButtonView.swift in Sources */,
 				FF10024A2B25BE740011A4DC /* LanguageModelSD.swift in Sources */,
 				FF6B7B132B3EE7AC00E8FEA3 /* Throttler.swift in Sources */,
+				1792B02D2D8F4D9200D66667 /* RetrievalHeaderView.swift in Sources */,
 				FF1002402B24F7320011A4DC /* SideBarMenuView.swift in Sources */,
+				1792B0372D8F4D9200D66667 /* DatabaseView.swift in Sources */,
+				1792B0122D8F4D9200D66667 /* CircularProgressIndicator.swift in Sources */,
 				FF9300DE2B782A28000859F4 /* UnreachableAPIView.swift in Sources */,
+				1792B0242D8F4D9200D66667 /* RetrievalGuide.swift in Sources */,
+				1792B0072D8F4D9200D66667 /* TextSplitter.swift in Sources */,
 				FF6D820D2B90C925001183A8 /* CompletionPanelView.swift in Sources */,
 				FF6D821C2B914202001183A8 /* CompletionsEditorView.swift in Sources */,
 				FFD57E302BF29145003FEFF1 /* MarkdownColours.swift in Sources */,
@@ -713,20 +877,24 @@
 				FFEC9BE32B81358800AFBA63 /* DeallocPrinter.swift in Sources */,
 				FFBBF4842B34881B008D611C /* SpeechRecogniser.swift in Sources */,
 				FF6D82122B911079001183A8 /* PanelCompletionsVM.swift in Sources */,
+				1792B0092D8F4D9200D66667 /* DatabaseSD.swift in Sources */,
 				FFEC32AA2B24797C003E5C04 /* ChatView_iOS.swift in Sources */,
 				FF6D82152B911536001183A8 /* Accessibility.swift in Sources */,
 				FF0146CD2B3DADCA00A2A9F6 /* HapticsService.swift in Sources */,
 				FF5FA0D62B35169400BC471D /* Binding+Extension.swift in Sources */,
 				FFE21C782B82353A00A69B9C /* SleepTest.swift in Sources */,
 				FF1002502B25C79F0011A4DC /* SwiftDataService.swift in Sources */,
+				1792B03C2D8F4D9200D66667 /* UseDocumentView.swift in Sources */,
 				FF7FBE4C2B78E384000901F7 /* SamplePrompt.swift in Sources */,
 				FF38F8582B7AB1AD00546B56 /* PanelManager.swift in Sources */,
 				FF6D82172B9122F9001183A8 /* CompletionInstructionSD.swift in Sources */,
 				FF226A652BE2A0EC00CC91F1 /* SelectTextSheet.swift in Sources */,
 				FF10025A2B2624C40011A4DC /* ConversationHistoryListView.swift in Sources */,
+				1792B0352D8F4D9200D66667 /* TextMessageInput.swift in Sources */,
 				FF10026D2B2751760011A4DC /* SettingsView.swift in Sources */,
 				FF33066C2B83BB31007B33E5 /* SidebarButton.swift in Sources */,
 				FFD57E322BF291B2003FEFF1 /* CodeBlockView.swift in Sources */,
+				F8924F172D918BE500552A63 /* SVDBService.swift in Sources */,
 				FF1002542B261D460011A4DC /* MessageListVIew.swift in Sources */,
 				FF10024E2B25C2A70011A4DC /* ConversationSD.swift in Sources */,
 				FF9C920C2BF0C088004C8275 /* OptionsMenuView.swift in Sources */,
@@ -735,9 +903,14 @@
 				FF2F03422B795E0B00349855 /* Clipboard.swift in Sources */,
 				3396E0762BD877D500213816 /* Menus.swift in Sources */,
 				FF9300DA2B781D97000859F4 /* ToolbarView_macOS.swift in Sources */,
+				1792B0002D8F4D9200D66667 /* URL+Extension.swift in Sources */,
 				FF1002522B2609980011A4DC /* ModelContext+Extension.swift in Sources */,
+				1792B00B2D8F4D9200D66667 /* DocumentSD.swift in Sources */,
 				FF1002752B278C170011A4DC /* AppStore.swift in Sources */,
 				FF1002732B276EC10011A4DC /* AppColorScheme.swift in Sources */,
+				1792B01B2D8F4D9200D66667 /* DeleteDatabaseButton.swift in Sources */,
+				1792B0052D8F4D9200D66667 /* DataLoader.swift in Sources */,
+				1792B0262D8F4D9200D66667 /* RetrievalGuideItem.swift in Sources */,
 				FF10025E2B2648460011A4DC /* ConversationState.swift in Sources */,
 				FFEC9BE72B813A8D00AFBA63 /* RemovableImage.swift in Sources */,
 				FFFD00C22B92607800392AE6 /* CompletionsStore.swift in Sources */,
@@ -876,7 +1049,7 @@
 				CURRENT_PROJECT_VERSION = 51;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Enchanted/Preview Content\"";
-				DEVELOPMENT_TEAM = JDDZ55DT74;
+				DEVELOPMENT_TEAM = CQ6C9JDWVW;
 				ENABLE_HARDENED_RUNTIME = YES;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
@@ -928,7 +1101,7 @@
 				CURRENT_PROJECT_VERSION = 51;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Enchanted/Preview Content\"";
-				DEVELOPMENT_TEAM = JDDZ55DT74;
+				DEVELOPMENT_TEAM = CQ6C9JDWVW;
 				ENABLE_HARDENED_RUNTIME = YES;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
@@ -992,6 +1165,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1792B00E2D8F4D9200D66667 /* XCRemoteSwiftPackageReference "SVDB" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Dripfarm/SVDB";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		FF0611E82C04A11800443B33 /* XCRemoteSwiftPackageReference "Magnet" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AugustDev/Magnet";
@@ -1067,6 +1248,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1792B00F2D8F4D9200D66667 /* SVDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1792B00E2D8F4D9200D66667 /* XCRemoteSwiftPackageReference "SVDB" */;
+			productName = SVDB;
+		};
 		FF0611E92C04A11800443B33 /* Magnet */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FF0611E82C04A11800443B33 /* XCRemoteSwiftPackageReference "Magnet" */;
