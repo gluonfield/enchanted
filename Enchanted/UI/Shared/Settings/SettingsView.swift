@@ -19,14 +19,21 @@ struct SettingsView: View {
     @Binding var appUserInitials: String
     @Binding var pingInterval: String
     @Binding var voiceIdentifier: String
+    @Binding var selectedProvider: String
+    @Binding var openAIUri: String
+    @Binding var openAIApiKey: String
     @State var ollamaStatus: Bool?
     var save: () -> ()
     var checkServer: () -> ()
     var deleteAll: () -> ()
     var ollamaLangugeModels: [LanguageModelSD]
     var voices: [AVSpeechSynthesisVoice]
-    
+
     @State private var deleteConversationsDialog = false
+
+    private var currentProvider: ModelProvider {
+        ModelProvider(rawValue: selectedProvider) ?? .ollama
+    }
     
     var body: some View {
         VStack {
@@ -62,18 +69,66 @@ struct SettingsView: View {
             .padding()
             
             Form {
-                Section(header: Text("Ollama").font(.headline)) {
-                    
-                    TextField("Ollama server URI", text: $ollamaUri, onCommit: checkServer)
-                        .textContentType(.URL)
-                        .disableAutocorrection(true)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                Section(header: Text("API Provider").font(.headline)) {
+                    Picker("Provider", selection: $selectedProvider) {
+                        ForEach(ModelProvider.allCases, id: \.rawValue) { provider in
+                            Text(provider.displayName).tag(provider.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .onChange(of: selectedProvider) { _, _ in
+                        checkServer()
+                    }
+                }
+
+                if currentProvider == .ollama {
+                    Section(header: Text("Ollama").font(.headline)) {
+
+                        TextField("Ollama server URI", text: $ollamaUri, onCommit: checkServer)
+                            .textContentType(.URL)
+                            .disableAutocorrection(true)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
 #if !os(macOS)
-                        .padding(.top, 8)
-                        .keyboardType(.URL)
-                        .autocapitalization(.none)
+                            .padding(.top, 8)
+                            .keyboardType(.URL)
+                            .autocapitalization(.none)
 #endif
-                    
+
+                        TextField("Bearer Token", text: $ollamaBearerToken)
+                            .disableAutocorrection(true)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+#if os(iOS)
+                            .autocapitalization(.none)
+#endif
+                    }
+                } else {
+                    Section(header: Text("OpenAI Compatible").font(.headline)) {
+
+                        TextField("Server URI (e.g. http://localhost:4000)", text: $openAIUri, onCommit: checkServer)
+                            .textContentType(.URL)
+                            .disableAutocorrection(true)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+#if !os(macOS)
+                            .padding(.top, 8)
+                            .keyboardType(.URL)
+                            .autocapitalization(.none)
+#endif
+
+                        SecureField("API Key", text: $openAIApiKey)
+                            .disableAutocorrection(true)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+#if os(iOS)
+                            .autocapitalization(.none)
+#endif
+
+                        Text("Compatible with LiteLLM, OpenRouter, Azure OpenAI, and other OpenAI-compatible APIs")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+
+                Section(header: Text("Model Settings").font(.headline)) {
+
                     VStack(alignment: .leading) {
                         Text("System prompt")
                         TextEditor(text: $systemPrompt)
@@ -82,7 +137,7 @@ struct SettingsView: View {
                             .multilineTextAlignment(.leading)
                             .frame(minHeight: 100)
                     }
-                    
+
                     Picker(selection: $defaultOllamModel) {
                         ForEach(ollamaLangugeModels, id:\.self) { model in
                             Text(model.name).tag(model.name)
@@ -91,22 +146,14 @@ struct SettingsView: View {
                         Label {
                             Text("Default Model")
                         } icon: {
-                            Image("ollama")
-                                .renderingMode(.template)
+                            Image(systemName: "cpu")
                                 .resizable()
                                 .scaledToFit()
                                 .foregroundColor(Color(.label))
                                 .frame(width: 24, height: 24)
                         }
                     }
-                    
-                    
-                    TextField("Bearer Token", text: $ollamaBearerToken)
-                        .disableAutocorrection(true)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-#if os(iOS)
-                        .autocapitalization(.none)
-#endif
+
                     TextField("Ping Interval (seconds)", text: $pingInterval)
                         .disableAutocorrection(true)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -209,6 +256,9 @@ struct SettingsView: View {
         appUserInitials: .constant("AM"),
         pingInterval: .constant("5"),
         voiceIdentifier: .constant("sample"),
+        selectedProvider: .constant(ModelProvider.ollama.rawValue),
+        openAIUri: .constant("http://localhost:4000"),
+        openAIApiKey: .constant(""),
         save: {},
         checkServer: {},
         deleteAll: {},

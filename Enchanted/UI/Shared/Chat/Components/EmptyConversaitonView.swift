@@ -9,6 +9,9 @@ import SwiftUI
 
 struct EmptyConversaitonView: View, KeyboardReadable {
     @Environment(\.openURL) private var openURL
+#if os(iOS)
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+#endif
     @State var showPromptsAnimation = false
     @State var prompts: [SamplePrompts] = []
     var sendPrompt: (String) -> ()
@@ -16,12 +19,22 @@ struct EmptyConversaitonView: View, KeyboardReadable {
 #if os(iOS)
     @State var isKeyboardVisible = false
 #endif
-    
+
 #if os(macOS)
     var columns = Array.init(repeating: GridItem(.flexible(), spacing: 15), count: 4)
-#else
-    var columns = [GridItem(.flexible()), GridItem(.flexible())]
 #endif
+
+    private var gridColumns: [GridItem] {
+#if os(macOS)
+        return columns
+#else
+        if horizontalSizeClass == .regular {
+            return Array(repeating: GridItem(.flexible(), spacing: 15), count: 4)
+        } else {
+            return [GridItem(.flexible()), GridItem(.flexible())]
+        }
+#endif
+    }
     @State var visibleItems = Set<Int>()
     
     func onFreysaTap() {
@@ -61,7 +74,7 @@ struct EmptyConversaitonView: View, KeyboardReadable {
 //                            }
                 }
                 
-                LazyVGrid(columns: columns, alignment: .leading, spacing: 15) {
+                LazyVGrid(columns: gridColumns, alignment: .leading, spacing: 15) {
                     ForEach(0..<prompts.prefix(4).count, id: \.self) { index in
                         Button(action: {
                             withAnimation {

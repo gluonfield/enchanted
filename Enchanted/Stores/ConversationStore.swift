@@ -162,13 +162,44 @@ final class ConversationStore: Sendable {
             try await swiftDataService.createMessage(assistantMessage)
             try await reloadConversation(conversation)
             try? await loadConversations()
-            
-            if await OllamaService.shared.ollamaKit.reachable() {
-                DispatchQueue.global(qos: .background).async {
-                    var request = OKChatRequestData(model: model.name, messages: messageHistory)
-                    request.options = OKCompletionOptions(temperature: 0)
-                    
-                    self.generation = OllamaService.shared.ollamaKit.chat(data: request)
+
+            let selectedProvider = UserDefaults.standard.string(forKey: "selectedProvider") ?? ModelProvider.ollama.rawValue
+            let provider = ModelProvider(rawValue: selectedProvider) ?? .ollama
+
+            if provider == .ollama {
+                if await OllamaService.shared.ollamaKit.reachable() {
+                    DispatchQueue.global(qos: .background).async {
+                        var request = OKChatRequestData(model: model.name, messages: messageHistory)
+                        request.options = OKCompletionOptions(temperature: 0)
+
+                        self.generation = OllamaService.shared.ollamaKit.chat(data: request)
+                            .sink(receiveCompletion: { [weak self] completion in
+                                switch completion {
+                                case .finished:
+                                    self?.handleComplete()
+                                case .failure(let error):
+                                    self?.handleError(error.localizedDescription)
+                                }
+                            }, receiveValue: { [weak self] response in
+                                self?.handleReceive(response)
+                            })
+
+                    }
+                } else {
+                    self.handleError("Server unreachable")
+                }
+            } else {
+                // OpenAI-compatible API
+                if await OpenAIService.shared.reachable() {
+                    DispatchQueue.global(qos: .background).async {
+                        // Convert message history to OpenAI format
+                        let openAIMessages = self.convertToOpenAIMessages(messageHistory, image: image?.render())
+
+                        self.generation = OpenAIService.shared.chat(
+                            model: model.name,
+                            messages: openAIMessages,
+                            temperature: 0
+                        )
                         .sink(receiveCompletion: { [weak self] completion in
                             switch completion {
                             case .finished:
@@ -177,12 +208,45 @@ final class ConversationStore: Sendable {
                                 self?.handleError(error.localizedDescription)
                             }
                         }, receiveValue: { [weak self] response in
-                            self?.handleReceive(response)
+                            self?.handleOpenAIReceive(response)
                         })
-                    
+                    }
+                } else {
+                    self.handleError("Server unreachable")
                 }
-            } else {
-                self.handleError("Server unreachable")
+            }
+        }
+    }
+
+    private func convertToOpenAIMessages(_ messages: [OKChatRequestData.Message], image: PlatformImage? = nil) -> [OpenAIChatMessage] {
+        var openAIMessages: [OpenAIChatMessage] = []
+
+        for (index, msg) in messages.enumerated() {
+            let isLastMessage = index == messages.count - 1
+            let imageBase64 = isLastMessage ? image?.convertImageToBase64String() : nil
+
+            openAIMessages.append(OpenAIChatMessage(
+                role: msg.role.rawValue,
+                content: msg.content,
+                imageBase64: imageBase64
+            ))
+        }
+
+        return openAIMessages
+    }
+
+    @MainActor
+    private func handleOpenAIReceive(_ response: OpenAIChatResponse) {
+        if messages.isEmpty { return }
+
+        if let responseContent = response.content {
+            currentMessageBuffer = currentMessageBuffer + responseContent
+
+            throttler.throttle { [weak self] in
+                guard let self = self else { return }
+                let lastIndex = self.messages.count - 1
+                self.messages[lastIndex].content.append(currentMessageBuffer)
+                currentMessageBuffer = ""
             }
         }
     }
