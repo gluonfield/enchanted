@@ -121,6 +121,34 @@ You're done! Make a prompt.
 
    You're done! Make a prompt.
 
+# Development
+
+## Xcode MCP Server (Warp Terminal)
+
+This project includes an MCP (Model Context Protocol) server (`MCPBridge`) that integrates Xcode with AI-powered terminals like [Warp](https://www.warp.dev). It enables tools such as building the project, running tests, searching code, and rendering SwiftUI previews — all from the terminal.
+
+### Troubleshooting: `MCP_XCODE_PID environment variable not set`
+
+If you see this error in the MCP server logs:
+
+```
+mcpbridge/MCPBridge.swift:125: Fatal error: MCP_XCODE_PID environment variable not set and no running Xcode processes found
+```
+
+**Cause:** The MCPBridge requires a running Xcode instance to connect to. It looks for either the `MCP_XCODE_PID` environment variable or a running Xcode process.
+
+**Fix:**
+
+1. Open Xcode (`open -a Xcode`) **before** launching Warp.
+2. Restart Warp so it re-initializes the MCP server with Xcode available.
+3. Verify the connection in Warp under **Settings → MCP Servers**, or by using any Xcode MCP tool (e.g. `XcodeListWindows`).
+
+Alternatively, set the `MCP_XCODE_PID` environment variable to the PID of a running Xcode process:
+
+```shell
+export MCP_XCODE_PID=$(pgrep -x Xcode)
+```
+
 # Contact
 
 For any questions please do not hesitate to contact me at augustinas@subj.org
