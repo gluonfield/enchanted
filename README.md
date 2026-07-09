@@ -123,6 +123,9 @@ You're done! Make a prompt.
 
    You're done! Make a prompt.
 
+You can also use the OpenRouter proxy if you'd like to work with non-local models. To do this, you'll need to run the proxy server:
+https://github.com/xsharov/enchanted-ollama-openrouter-proxy
+
 # Contact
 
 For any questions please do not hesitate to contact me at augustinas@subj.org
