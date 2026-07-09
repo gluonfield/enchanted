@@ -20,6 +20,7 @@ struct InputFieldsView: View {
     @State private var selectedImage: Image?
     @State private var fileDropActive: Bool = false
     @State private var fileSelectingActive: Bool = false
+    @State private var textFieldHeight: CGFloat = 40
     @FocusState private var isFocusedInput: Bool
     
     @MainActor private func sendMessage() {
@@ -69,27 +70,45 @@ struct InputFieldsView: View {
             }
             
             ZStack(alignment: .trailing) {
-                TextField("Message", text: $message.animation(.easeOut(duration: 0.3)), axis: .vertical)
-                    .focused($isFocusedInput)
-                    .font(.system(size: 14))
-                    .frame(maxWidth:.infinity, minHeight: 40)
-                    .clipped()
-                    .textFieldStyle(.plain)
-#if os(macOS)
-                    .onSubmit {
-                        if NSApp.currentEvent?.modifierFlags.contains(.shift) == true {
-                            message += "\n"
-                        } else {
-                            sendMessage()
+                ScrollViewReader { scrollView in
+                    ScrollView {
+                        TextField("Message",
+                                  text: $message.animation(.easeOut(duration: 0.3)),
+                                  axis: .vertical)
+                        .focused($isFocusedInput)
+                        .font(.system(size: 14))
+                        .frame(maxWidth:.infinity, minHeight: 40)
+                        .clipped()
+                        .textFieldStyle(.plain)
+                        .overlay {
+                            GeometryReader { geo in
+                                Color.clear.onChange(of: geo.size.height) {
+                                    withAnimation {
+                                        self.textFieldHeight = geo.size.height
+                                    }
+                                }
+                            }
                         }
-                    }
-#endif
-                /// TextField bypasses drop area
-                    .allowsHitTesting(!fileDropActive)
+                        
 #if os(macOS)
-                    .addCustomHotkeys(hotkeys)
+                        .onSubmit {
+                            if NSApp.currentEvent?.modifierFlags.contains(.shift) == true {
+                                message += "\n"
+                            } else {
+                                sendMessage()
+                            }
+                        }
 #endif
-                    .padding(.trailing, 80)
+                        /// TextField bypasses drop area
+                        .allowsHitTesting(!fileDropActive)
+#if os(macOS)
+                        .addCustomHotkeys(hotkeys)
+#endif
+                        .padding(.trailing, 80)
+                    }
+                    .frame(maxHeight: min(textFieldHeight, 120+10))
+                    // plus 10 to indicate it's scrollable.
+                }
                 
                 
                 HStack {
