@@ -18,6 +18,7 @@ extension KeyboardShortcuts.Name {
 @main
 struct EnchantedApp: App {
     @State private var appStore = AppStore.shared
+    @State private var retrievalStore = RetrievalStore.shared
 #if os(macOS)
     @NSApplicationDelegateAdaptor(PanelManager.self) var panelManager
 #endif
@@ -30,10 +31,20 @@ struct EnchantedApp: App {
                     print("heya")
                     panelManager.togglePanel()
                 }
-                .onAppear {
-                    NSWindow.allowsAutomaticWindowTabbing = false
-                }
 #endif
+                .onAppear {
+#if os(macOS)
+                    NSWindow.allowsAutomaticWindowTabbing = false
+#endif
+                    Task{
+                        do {
+                            try await retrievalStore.fetchDatabases()
+                            retrievalStore.selectDatabase(database: nil)
+                        } catch {
+                            print("Error fetching databases: \(error)")
+                        }
+                    }
+                }
         }
 #if os(macOS)
         .commands {

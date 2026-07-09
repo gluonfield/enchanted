@@ -50,3 +50,11 @@ class OllamaService: @unchecked Sendable {
         return await ollamaKit.reachable()
     }
 }
+
+// MARK: - Vector embeddings
+extension OllamaService {
+    func getEmbedding(prompt: String, model: LanguageModelSD) async -> [Double]? {
+        let res = try? await ollamaKit.generateEmbeddings(data: .init(model: model.name, prompt: prompt))
+        return res?.embedding
+    }
+}
