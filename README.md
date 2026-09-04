@@ -123,6 +123,25 @@ You're done! Make a prompt.
 
    You're done! Make a prompt.
 
+### Case 3. You run llmman
+
+Enchanted works with any server that speaks the Ollama API. [llmman](https://github.com/llmmanorg/llmman) is a local model runner that serves the Ollama API (alongside OpenAI- and Anthropic-compatible ones) on port 17434 instead of 11434.
+
+1. Install llmman, start the server and pull a model:
+
+   ```shell
+   curl -fsSL https://raw.githubusercontent.com/llmmanorg/llmman/main/install.sh | sh
+   llmman serve
+   llmman pull gemma4
+   ```
+
+2. On the same Mac, set the server endpoint in App Settings to `http://localhost:17434`.
+3. From another device, follow Case 2 but forward port 17434 instead:
+
+   ```shell
+   ngrok http 17434 --host-header="localhost:17434"
+   ```
+
 # Contact
 
 For any questions please do not hesitate to contact me at augustinas@subj.org
