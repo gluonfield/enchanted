@@ -8,19 +8,40 @@
 import SwiftUI
 
 struct EmptyConversaitonView: View, KeyboardReadable {
-    @State private var showPromptsAnimation = false
-    @State private var prompts: [SamplePrompts] = []
-    let sendPrompt: (String) -> Void
+    @Environment(\.openURL) private var openURL
 #if os(iOS)
-    @State private var isKeyboardVisible = false
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 #endif
-    
+    @State var showPromptsAnimation = false
+    @State var prompts: [SamplePrompts] = []
+    var sendPrompt: (String) -> ()
+    @State private var isHovering = false
+#if os(iOS)
+    @State var isKeyboardVisible = false
+#endif
+
 #if os(macOS)
-    private let columns = Array(repeating: GridItem(.flexible(), spacing: 15), count: 4)
-#else
-    private let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    var columns = Array.init(repeating: GridItem(.flexible(), spacing: 15), count: 4)
 #endif
-    @State private var visibleItems = Set<Int>()
+
+    private var gridColumns: [GridItem] {
+#if os(macOS)
+        return columns
+#else
+        if horizontalSizeClass == .regular {
+            return Array(repeating: GridItem(.flexible(), spacing: 15), count: 4)
+        } else {
+            return [GridItem(.flexible()), GridItem(.flexible())]
+        }
+#endif
+    }
+    @State var visibleItems = Set<Int>()
+    
+    func onFreysaTap() {
+        if let url = URL(string: "https://freysa.ai") {
+            openURL(url)
+        }
+    }
     
     var body: some View {
         VStack {
@@ -38,11 +59,49 @@ struct EmptyConversaitonView: View, KeyboardReadable {
                                 endPoint: .trailing
                             )
                         )
+                    
+//                    Button(action: onFreysaTap) {
+//                        Text("by FREYSA")
+//                            .font(.system(size: isHovering ? 19 : 17, weight: .light))
+//                            .scaleEffect(isHovering ? 1.05 : 1.0)
+//                            .opacity(isHovering ? 0.8 : 1.0)
+//                            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isHovering)
+//
+//                    }
+//                    .buttonStyle(.plain)
+//                    .onHover { hovering in
+//                                isHovering = hovering
+//                            }
                 }
                 
-                LazyVGrid(columns: columns, alignment: .leading, spacing: 15) {
+                LazyVGrid(columns: gridColumns, alignment: .leading, spacing: 15) {
                     ForEach(0..<prompts.prefix(4).count, id: \.self) { index in
-                        promptButton(for: prompts[index], index: index)
+                        Button(action: {
+                            withAnimation {
+                                sendPrompt(prompts[index].prompt)
+                            }
+                        }) {
+                            VStack(alignment: .leading) {
+                                Text(prompts[index].prompt)
+                                    .font(.system(size: 15))
+                                Spacer()
+                                
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: prompts[index].type.icon)
+                                }
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(15)
+                            .background(Color.gray5Custom)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            
+                        }
+                        .opacity(visibleItems.contains(index) ? 1 : 0)
+                        .animation(.easeIn(duration: 0.3).delay(0.2 * Double(index)), value: visibleItems)
+                        .transition(.slide)
+                        .showIf(showPromptsAnimation)
+                        .buttonStyle(.plain)
                     }
                 }
                 .onAppear {
@@ -78,47 +137,7 @@ struct EmptyConversaitonView: View, KeyboardReadable {
             }
         }
 #endif
-
-    }
-
-    private func promptButton(for prompt: SamplePrompts, index: Int) -> some View {
-        Button(action: {
-            withAnimation {
-                sendPrompt(prompt.prompt)
-            }
-        }) {
-            VStack(alignment: .leading, spacing: 10) {
-                Text(prompt.prompt)
-                    .font(.system(size: 15))
-                    .foregroundStyle(Color.labelCustom)
-                    .lineLimit(3)
-                    .multilineTextAlignment(.leading)
-
-                Spacer(minLength: 8)
-
-                HStack {
-                    Spacer()
-                    Image(systemName: prompt.type.icon)
-                        .imageScale(.medium)
-                        .foregroundStyle(Color.secondary)
-                        .accessibilityHidden(true)
-                }
-            }
-            .frame(maxWidth: .infinity, minHeight: 96, alignment: .leading)
-            .padding(15)
-            .background(Color.gray5Custom, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .overlay {
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .stroke(Color.gray4Custom.opacity(0.35), lineWidth: 1)
-            }
-            .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        }
-        .opacity(visibleItems.contains(index) ? 1 : 0)
-        .animation(.easeOut(duration: 0.3).delay(0.2 * Double(index)), value: visibleItems)
-        .transition(.slide)
-        .showIf(showPromptsAnimation)
-        .buttonStyle(.plain)
-        .accessibilityLabel(Text(prompt.prompt))
+        
     }
 }
 

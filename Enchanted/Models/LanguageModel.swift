@@ -13,6 +13,16 @@ struct LanguageModel {
     var imageSupport: Bool
 }
 
-enum ModelProvider: Codable {
-    case ollama
+enum ModelProvider: String, Codable, CaseIterable {
+    case ollama = "ollama"
+    case openAI = "openai"
+
+    var displayName: String {
+        switch self {
+        case .ollama:
+            return "Ollama"
+        case .openAI:
+            return "OpenAI Compatible"
+        }
+    }
 }

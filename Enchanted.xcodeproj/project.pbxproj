@@ -17,6 +17,7 @@
 		FF1002322B2483A20011A4DC /* Colours+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1002312B2483A20011A4DC /* Colours+Extension.swift */; };
 		FF1002392B24BBF20011A4DC /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1002382B24BBF20011A4DC /* Chat.swift */; };
 		FF10023E2B24F4900011A4DC /* OllamaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF10023D2B24F4900011A4DC /* OllamaService.swift */; };
+		AABB00012CE8000100000001 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB00022CE8000100000001 /* OpenAIService.swift */; };
 		FF1002402B24F7320011A4DC /* SideBarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF10023F2B24F7320011A4DC /* SideBarMenuView.swift */; };
 		FF1002442B25BB730011A4DC /* ConversationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1002432B25BB730011A4DC /* ConversationStore.swift */; };
 		FF1002462B25BCE70011A4DC /* LanguageModelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1002452B25BCE70011A4DC /* LanguageModelStore.swift */; };
@@ -114,6 +115,7 @@
 		FF1002312B2483A20011A4DC /* Colours+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colours+Extension.swift"; sourceTree = "<group>"; };
 		FF1002382B24BBF20011A4DC /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		FF10023D2B24F4900011A4DC /* OllamaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OllamaService.swift; sourceTree = "<group>"; };
+		AABB00022CE8000100000001 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
 		FF10023F2B24F7320011A4DC /* SideBarMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarMenuView.swift; sourceTree = "<group>"; };
 		FF1002432B25BB730011A4DC /* ConversationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationStore.swift; sourceTree = "<group>"; };
 		FF1002452B25BCE70011A4DC /* LanguageModelStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModelStore.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				FF0146CC2B3DADCA00A2A9F6 /* HapticsService.swift */,
 				FF2F03482B796A6500349855 /* HotkeyService.swift */,
 				FF10023D2B24F4900011A4DC /* OllamaService.swift */,
+				AABB00022CE8000100000001 /* OpenAIService.swift */,
 				FF10024F2B25C79F0011A4DC /* SwiftDataService.swift */,
 				FF6B7B122B3EE7AC00E8FEA3 /* Throttler.swift */,
 				FFCF00F02C03209A00590E79 /* SpeechService.swift */,
@@ -665,6 +668,7 @@
 				FF10024C2B25BEA00011A4DC /* MessageSD.swift in Sources */,
 				FFCF00F12C03209A00590E79 /* SpeechService.swift in Sources */,
 				FF10023E2B24F4900011A4DC /* OllamaService.swift in Sources */,
+				AABB00012CE8000100000001 /* OpenAIService.swift in Sources */,
 				FFBBF48C2B35051D008D611C /* UIImage+Extension.swift in Sources */,
 				FF1002302B2482BA0011A4DC /* ChatMessageView.swift in Sources */,
 				FF1002322B2483A20011A4DC /* Colours+Extension.swift in Sources */,

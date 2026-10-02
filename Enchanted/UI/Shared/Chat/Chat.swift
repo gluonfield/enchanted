@@ -15,6 +15,10 @@ struct Chat: View, Sendable {
     @AppStorage("appUserInitials") private var userInitials: String = ""
     @AppStorage("defaultOllamaModel") private var defaultOllamaModel: String = ""
     @State var showMenu = false
+#if os(iOS)
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @State private var columnVisibility = NavigationSplitViewVisibility.doubleColumn
+#endif
     
     init(languageModelStore: LanguageModelStore, conversationStore: ConversationStore, appStore: AppStore) {
         _languageModelStore = State(initialValue: languageModelStore)
@@ -59,9 +63,17 @@ struct Chat: View, Sendable {
             await languageModelStore.setModel(model: conversation.model)
             Haptics.shared.mediumTap()
         }
+#if os(iOS)
+        if horizontalSizeClass == .compact {
+            withAnimation {
+                showMenu.toggle()
+            }
+        }
+#else
         withAnimation {
             showMenu.toggle()
         }
+#endif
     }
     
     @MainActor func onStopGenerateTap() {
@@ -146,30 +158,67 @@ struct Chat: View, Sendable {
                 copyChat: copyChat
             )
 #else
-            SideBarStack(sidebarWidth: 300,showSidebar: $showMenu, sidebar: {
-                SidebarView(
-                    selectedConversation: conversationStore.selectedConversation,
-                    conversations: conversationStore.conversations,
-                    onConversationTap: onConversationTap,
-                    onConversationDelete: onConversationDelete,
-                    onDeleteDailyConversations: conversationStore.deleteDailyConversations
-                )
-            }) {
-                ChatView(
-                    conversation: conversationStore.selectedConversation,
-                    messages: conversationStore.messages,
-                    modelsList: languageModelStore.models,
-                    selectedModel: languageModelStore.selectedModel,
-                    onSelectModel: languageModelStore.setModel,
-                    onMenuTap: toggleMenu,
-                    onNewConversationTap: newConversation,
-                    onSendMessageTap: sendMessage,
-                    conversationState: conversationStore.conversationState,
-                    onStopGenerateTap: onStopGenerateTap,
-                    reachable: appStore.isReachable,
-                    modelSupportsImages: languageModelStore.supportsImages,
-                    userInitials: userInitials
-                )
+            if horizontalSizeClass == .regular {
+                NavigationSplitView(columnVisibility: $columnVisibility) {
+                    SidebarView(
+                        selectedConversation: conversationStore.selectedConversation,
+                        conversations: conversationStore.conversations,
+                        onConversationTap: onConversationTap,
+                        onConversationDelete: onConversationDelete,
+                        onDeleteDailyConversations: conversationStore.deleteDailyConversations
+                    )
+                    .navigationTitle("Conversations")
+                    .toolbar {
+                        ToolbarItem(placement: .primaryAction) {
+                            Button(action: newConversation) {
+                                Image(systemName: "square.and.pencil")
+                            }
+                        }
+                    }
+                } detail: {
+                    ChatView(
+                        conversation: conversationStore.selectedConversation,
+                        messages: conversationStore.messages,
+                        modelsList: languageModelStore.models,
+                        selectedModel: languageModelStore.selectedModel,
+                        onSelectModel: languageModelStore.setModel,
+                        onMenuTap: { columnVisibility = .doubleColumn },
+                        onNewConversationTap: newConversation,
+                        onSendMessageTap: sendMessage,
+                        conversationState: conversationStore.conversationState,
+                        onStopGenerateTap: onStopGenerateTap,
+                        reachable: appStore.isReachable,
+                        modelSupportsImages: languageModelStore.supportsImages,
+                        userInitials: userInitials
+                    )
+                }
+                .navigationSplitViewStyle(.balanced)
+            } else {
+                SideBarStack(sidebarWidth: 300, showSidebar: $showMenu, sidebar: {
+                    SidebarView(
+                        selectedConversation: conversationStore.selectedConversation,
+                        conversations: conversationStore.conversations,
+                        onConversationTap: onConversationTap,
+                        onConversationDelete: onConversationDelete,
+                        onDeleteDailyConversations: conversationStore.deleteDailyConversations
+                    )
+                }) {
+                    ChatView(
+                        conversation: conversationStore.selectedConversation,
+                        messages: conversationStore.messages,
+                        modelsList: languageModelStore.models,
+                        selectedModel: languageModelStore.selectedModel,
+                        onSelectModel: languageModelStore.setModel,
+                        onMenuTap: toggleMenu,
+                        onNewConversationTap: newConversation,
+                        onSendMessageTap: sendMessage,
+                        conversationState: conversationStore.conversationState,
+                        onStopGenerateTap: onStopGenerateTap,
+                        reachable: appStore.isReachable,
+                        modelSupportsImages: languageModelStore.supportsImages,
+                        userInitials: userInitials
+                    )
+                }
             }
 #endif
         }

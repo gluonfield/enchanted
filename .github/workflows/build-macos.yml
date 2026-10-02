@@ -1,0 +1,142 @@
+name: Build macOS App
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  SCHEME: Enchanted
+  PROJECT: Enchanted.xcodeproj
+
+jobs:
+  build:
+    name: Build macOS App
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Resolve Swift Package Dependencies
+        run: |
+          xcodebuild -resolvePackageDependencies \
+            -project "$PROJECT" \
+            -scheme "$SCHEME"
+
+      - name: Build macOS App
+        run: |
+          # Build the app with a known derived data path (arm64 only for GitHub runners)
+          # Use -hideShellScriptEnvironment to reduce noise but keep errors visible
+          xcodebuild build \
+            -project "$PROJECT" \
+            -scheme "$SCHEME" \
+            -destination 'platform=macOS,arch=arm64' \
+            -configuration Release \
+            -derivedDataPath "${{ runner.temp }}/DerivedData" \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            DEVELOPMENT_TEAM="" \
+            ONLY_ACTIVE_ARCH=YES \
+            SWIFT_STRICT_CONCURRENCY=minimal \
+            SWIFT_TREAT_WARNINGS_AS_ERRORS=NO \
+            GCC_TREAT_WARNINGS_AS_ERRORS=NO 2>&1 | tee build.log
+
+          # If build failed, show the last 100 lines for debugging
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "=== BUILD FAILED - Last 100 lines of output ==="
+            tail -100 build.log
+            exit 1
+          fi
+
+      - name: Prepare App for Distribution
+        run: |
+          # Find and copy the built app
+          mkdir -p "${{ runner.temp }}/Export"
+
+          APP_PATH=$(find "${{ runner.temp }}/DerivedData/Build/Products/Release" -name "*.app" -type d | head -1)
+
+          if [ -n "$APP_PATH" ]; then
+            echo "Found app at: $APP_PATH"
+            cp -R "$APP_PATH" "${{ runner.temp }}/Export/"
+          else
+            echo "Error: No .app found in build products"
+            find "${{ runner.temp }}/DerivedData" -name "*.app" -type d
+            exit 1
+          fi
+
+      - name: Create DMG
+        run: |
+          # Install create-dmg
+          brew install create-dmg || true
+
+          APP_PATH="${{ runner.temp }}/Export/Enchanted.app"
+
+          if [ -d "$APP_PATH" ]; then
+            echo "Creating DMG from: $APP_PATH"
+
+            # Try create-dmg first, fall back to hdiutil
+            create-dmg \
+              --volname "Enchanted" \
+              --window-pos 200 120 \
+              --window-size 600 400 \
+              --icon-size 100 \
+              --icon "Enchanted.app" 150 185 \
+              --hide-extension "Enchanted.app" \
+              --app-drop-link 450 185 \
+              "${{ runner.temp }}/Enchanted.dmg" \
+              "$APP_PATH" || \
+            hdiutil create -volname "Enchanted" -srcfolder "$APP_PATH" -ov -format UDZO "${{ runner.temp }}/Enchanted.dmg"
+          else
+            echo "No .app found at $APP_PATH"
+            ls -la "${{ runner.temp }}/Export/" || true
+            exit 1
+          fi
+
+      - name: Upload App Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Enchanted-macOS-App
+          path: ${{ runner.temp }}/Export/Enchanted.app
+          if-no-files-found: warn
+
+      - name: Upload DMG Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Enchanted-macOS-DMG
+          path: ${{ runner.temp }}/Enchanted.dmg
+          if-no-files-found: warn
+
+  # Optional: Create a release when a tag is pushed
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Download DMG
+        uses: actions/download-artifact@v4
+        with:
+          name: Enchanted-macOS-DMG
+          path: ./artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./artifacts/*.dmg
+          draft: true
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

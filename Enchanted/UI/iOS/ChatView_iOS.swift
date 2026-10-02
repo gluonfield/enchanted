@@ -10,6 +10,7 @@ import SwiftUI
 import PhotosUI
 
 struct ChatView: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     var conversation: ConversationSD?
     var messages: [MessageSD]
     var modelsList: [LanguageModelSD]
@@ -21,14 +22,14 @@ struct ChatView: View {
     var reachable: Bool
     var onSelectModel: @MainActor (_ model: LanguageModelSD?) -> ()
     var userInitials: String
-    
+
     private var selectedModel: LanguageModelSD?
     @State private var message = ""
     @State private var isRecording = false
     @State private var editMessage: MessageSD?
     @FocusState private var isFocusedInput: Bool
     @StateObject var speechRecognizer = SpeechRecognizer()
-    
+
     /// Image selection
     @State private var pickerSelectorActive: PhotosPickerItem?
     @State private var selectedImage: Image?
@@ -86,33 +87,37 @@ struct ChatView: View {
     
     var header: some View {
         HStack(alignment: .center) {
-            Button(action: onMenuTap) {
-                Image(systemName: "line.3.horizontal")
-                    .renderingMode(.template)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 22)
-                    .foregroundColor(Color(.label))
+            if horizontalSizeClass == .compact {
+                Button(action: onMenuTap) {
+                    Image(systemName: "line.3.horizontal")
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 22)
+                        .foregroundColor(Color(.label))
+                }
             }
-            
+
             Spacer()
-            
+
             ModelSelectorView(
                 modelsList: modelsList,
                 selectedModel: selectedModel,
                 onSelectModel: onSelectModel
             )
             .showIf(!modelsList.isEmpty)
-            
+
             Spacer()
-            
-            Button(action: onNewConversationTap) {
-                Image(systemName: "square.and.pencil")
-                    .renderingMode(.template)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 22)
-                    .foregroundColor(Color(.label))
+
+            if horizontalSizeClass == .compact {
+                Button(action: onNewConversationTap) {
+                    Image(systemName: "square.and.pencil")
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 22)
+                        .foregroundColor(Color(.label))
+                }
             }
         }
     }
@@ -182,9 +187,11 @@ struct ChatView: View {
     
     var body: some View {
         VStack {
-            header
-                .padding(.horizontal)
-            
+            if horizontalSizeClass == .compact {
+                header
+                    .padding(.horizontal)
+            }
+
             if conversation != nil {
                 MessageListView(
                     messages: messages,
@@ -216,6 +223,23 @@ struct ChatView: View {
             if let newMessage = newMessage {
                 message = newMessage.content
                 isFocusedInput = true
+            }
+        }
+        .toolbar {
+            if horizontalSizeClass == .regular {
+                ToolbarItem(placement: .principal) {
+                    ModelSelectorView(
+                        modelsList: modelsList,
+                        selectedModel: selectedModel,
+                        onSelectModel: onSelectModel
+                    )
+                    .showIf(!modelsList.isEmpty)
+                }
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: onNewConversationTap) {
+                        Image(systemName: "square.and.pencil")
+                    }
+                }
             }
         }
     }

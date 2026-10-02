@@ -22,6 +22,9 @@ struct Settings: View {
     @AppStorage("appUserInitials") private var appUserInitials: String = ""
     @AppStorage("pingInterval") private var pingInterval: String = "5"
     @AppStorage("voiceIdentifier") private var voiceIdentifier: String = ""
+    @AppStorage("selectedProvider") private var selectedProvider: String = ModelProvider.ollama.rawValue
+    @AppStorage("openAIUri") private var openAIUri: String = ""
+    @AppStorage("openAIApiKey") private var openAIApiKey: String = ""
     
     @StateObject private var speechSynthesiser = SpeechSynthesizer.shared
     
@@ -37,8 +40,12 @@ struct Settings: View {
         if ollamaUri.last == "/" {
             ollamaUri = String(ollamaUri.dropLast())
         }
-        
+        if openAIUri.last == "/" {
+            openAIUri = String(openAIUri.dropLast())
+        }
+
         OllamaService.shared.initEndpoint(url: ollamaUri, bearerToken: ollamaBearerToken)
+        OpenAIService.shared.initEndpoint(url: openAIUri, apiKey: openAIApiKey)
         Task {
             Haptics.shared.mediumTap()
             try? await languageModelStore.loadModels()
@@ -48,8 +55,14 @@ struct Settings: View {
     
     private func checkServer() {
         Task {
-            OllamaService.shared.initEndpoint(url: ollamaUri)
-            ollamaStatus = await OllamaService.shared.reachable()
+            let provider = ModelProvider(rawValue: selectedProvider) ?? .ollama
+            if provider == .ollama {
+                OllamaService.shared.initEndpoint(url: ollamaUri)
+                ollamaStatus = await OllamaService.shared.reachable()
+            } else {
+                OpenAIService.shared.initEndpoint(url: openAIUri, apiKey: openAIApiKey)
+                ollamaStatus = await OpenAIService.shared.reachable()
+            }
             try? await languageModelStore.loadModels()
         }
     }
@@ -65,14 +78,17 @@ struct Settings: View {
     var body: some View {
         SettingsView(
             ollamaUri: $ollamaUri,
-            systemPrompt: $systemPrompt, 
+            systemPrompt: $systemPrompt,
             vibrations: $vibrations,
             colorScheme: $colorScheme,
-            defaultOllamModel: $defaultOllamaModel, 
+            defaultOllamModel: $defaultOllamaModel,
             ollamaBearerToken: $ollamaBearerToken,
             appUserInitials: $appUserInitials,
             pingInterval: $pingInterval,
             voiceIdentifier: $voiceIdentifier,
+            selectedProvider: $selectedProvider,
+            openAIUri: $openAIUri,
+            openAIApiKey: $openAIApiKey,
             save: save,
             checkServer: checkServer,
             deleteAll: deleteAll,

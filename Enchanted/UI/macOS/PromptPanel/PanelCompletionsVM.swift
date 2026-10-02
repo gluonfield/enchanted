@@ -50,9 +50,39 @@ final class CompletionsPanelVM {
         messageResponse = ""
         
         print("request", request.messages)
+
+        let selectedProvider = UserDefaults.standard.string(forKey: "selectedProvider") ?? ModelProvider.ollama.rawValue
+        let provider = ModelProvider(rawValue: selectedProvider) ?? .ollama
+
         Task {
-            if await OllamaService.shared.ollamaKit.reachable() {
-                generation = OllamaService.shared.ollamaKit.chat(data: request)
+            if provider == .ollama {
+                if await OllamaService.shared.ollamaKit.reachable() {
+                    generation = OllamaService.shared.ollamaKit.chat(data: request)
+                        .sink(receiveCompletion: { [weak self] completion in
+                            switch completion {
+                            case .finished:
+                                self?.handleComplete()
+                            case .failure(let error):
+                                self?.handleError(error.localizedDescription)
+                            }
+                        }, receiveValue: { [weak self] response in
+                            self?.handleReceive(response)
+                        })
+                } else {
+                    self.handleError("Server unreachable")
+                }
+            } else {
+                // OpenAI-compatible API
+                if await OpenAIService.shared.reachable() {
+                    let openAIMessages = messages.map { msg in
+                        OpenAIChatMessage(role: msg.role.rawValue, content: msg.content)
+                    }
+
+                    generation = OpenAIService.shared.chat(
+                        model: model.name,
+                        messages: openAIMessages,
+                        temperature: completion.modelTemperature.map { Double($0) } ?? 0.8
+                    )
                     .sink(receiveCompletion: { [weak self] completion in
                         switch completion {
                         case .finished:
@@ -61,10 +91,21 @@ final class CompletionsPanelVM {
                             self?.handleError(error.localizedDescription)
                         }
                     }, receiveValue: { [weak self] response in
-                        self?.handleReceive(response)
+                        self?.handleOpenAIReceive(response)
                     })
-            } else {
-                self.handleError("Server unreachable")
+                } else {
+                    self.handleError("Server unreachable")
+                }
+            }
+        }
+    }
+
+    @MainActor
+    private func handleOpenAIReceive(_ response: OpenAIChatResponse) {
+        Task {
+            if let responseContent = response.content {
+                await sentenceQueue.enqueue(responseContent)
+                self.messageResponse = self.messageResponse + responseContent
             }
         }
     }
